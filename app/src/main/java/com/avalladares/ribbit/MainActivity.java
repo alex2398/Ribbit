@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,9 +21,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.parse.ParseAnalytics;
+import com.parse.ParseUser;
 
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
+
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -32,8 +35,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
      * may be best to switch to a
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
-    SectionsPagerAdapter mSectionsPagerAdapter;
 
+    SectionsPagerAdapter mSectionsPagerAdapter;
+    public static final String TAG = MainActivity.class.getSimpleName();
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -46,14 +50,19 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
 
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
-        Intent intent = new Intent(this,LoginActivity.class);
-        // A�adimos un flag para evitar que se vaya a la mainActivity desde el boton volver
-        // new task a�ade una nueva tarea a la pila
-        // clear task limpia las tareas previas para que no se pueda volver a ella
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        // Comprobamos si hay un usuario logueado en el sistema (caché)
+        // Si no, vamos a la pantalla de login
+        ParseUser currentUser = ParseUser.getCurrentUser();
 
-        startActivity(intent);
+        if (currentUser != null) {
+            // do stuff with the user
+            Log.d(TAG, currentUser.getUsername());
+        } else {
+            // show the signup or login screen
+            navigateToLogin();
+        }
+
+
 
 
         // Set up the action bar.
@@ -91,14 +100,24 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         }
     }
 
+    private void navigateToLogin() {
+        Intent intent = new Intent(this,LoginActivity.class);
+        // añadimos un flag para evitar que se vaya a la mainActivity desde el boton volver
+        // new task añade una nueva tarea a la pila
+        // clear task limpia las tareas previas para que no se pueda volver a ella
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
 
+    // Hemos modificado el menu_main.xml para que muestre logout
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
+    // Añadimos la opción de pulsar en logout
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -107,8 +126,9 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_logout) {
+            ParseUser.logOut();
+            navigateToLogin();
         }
 
         return super.onOptionsItemSelected(item);

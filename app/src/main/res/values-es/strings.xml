@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="username_hint">Usename</string>
-    <string name="password">Password</string>
-    <string name="login_button">Login</string>
-    <string name="singup">Sign Up</string>
+    <string name="username_hint">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login_button">Entrar</string>
+    <string name="singup">Registrarse</string>
     <string name="email_hint">email@example.com</string>
-    <string name="signUp_button">Sign Up</string>
+    <string name="signUp_button">Registrarse</string>
+    <string name="action_settings">Configuracion</string>
+    <string name="signUp_error_message">Verifica que has introducido un usuario, contraseña y direccion de email!</string>
+    <string name="signUp_error_title">Vaya!</string>
+    <string name="login_error_message"/>
+    <string name="menu_logout_label">Logout</string>
 </resources>
