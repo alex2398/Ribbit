@@ -32,7 +32,7 @@ public class SignUpActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
 
@@ -53,7 +53,7 @@ public class SignUpActivity extends ActionBarActivity {
             dialog.show();
         } else {
             //create new user
-            setProgressBarIndeterminateVisibility(true);
+            setSupportProgressBarIndeterminateVisibility(true);
             ParseUser newUser = new ParseUser();
             newUser.setUsername(userName);
             newUser.setPassword(userPassword);
@@ -63,7 +63,7 @@ public class SignUpActivity extends ActionBarActivity {
 
                 @Override
                 public void done(com.parse.ParseException e) {
-                    setProgressBarIndeterminateVisibility(false);
+                    setSupportProgressBarIndeterminateVisibility(false);
                     if (e == null) {
                         // Success!!
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);

@@ -32,7 +32,7 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
@@ -60,12 +60,12 @@ public class LoginActivity extends ActionBarActivity {
             dialog.show();
         } else {
             //login
-            setProgressBarIndeterminateVisibility(true);
+            setSupportProgressBarIndeterminateVisibility(true);
             ParseUser.logInInBackground(userName, userPassword, new LogInCallback() {
                 @Override
                 public void done(ParseUser parseUser, com.parse.ParseException e) {
                     if (parseUser != null) {
-                        setProgressBarIndeterminateVisibility(false);
+                        setSupportProgressBarIndeterminateVisibility(false);
                         // Success!!
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
