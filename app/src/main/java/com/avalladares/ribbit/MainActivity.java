@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.parse.ParseAnalytics;
+
 
 public class MainActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -42,9 +44,11 @@ public class MainActivity extends ActionBarActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
+
         Intent intent = new Intent(this,LoginActivity.class);
-        // Añadimos un flag para evitar que se vaya a la mainActivity desde el boton volver
-        // new task añade una nueva tarea a la pila
+        // Aï¿½adimos un flag para evitar que se vaya a la mainActivity desde el boton volver
+        // new task aï¿½ade una nueva tarea a la pila
         // clear task limpia las tareas previas para que no se pueda volver a ella
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
