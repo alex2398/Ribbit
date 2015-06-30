@@ -36,10 +36,12 @@
     <string name="video_length_warning">Debes seleccionar un video con tamaño menor de 10 Mb</string>
     <string name="error_selecting_file">Hubo un problema con el archivo seleccionado</string>
     <string name="file_size_alert">El video seleccionado es demasiado largo!</string>
-    <string name="empty_reciepients_list">Choose some friends first</string>
     <string name="Send">Send</string>
-    <string name="error_creating_message">There was an error with the selected file. \n Please select a different one</string>
-    <string name="message_sent">Message sent!</string>
-    <string name="error_sending_message">There was an error sending the message. \n Please try again.</string>
-    <string name="menu_message_label">Send Message</string>
+    <string name="error_creating_message">Hubo un error con el archivo seleccionado. \n Por favor selecciona otro.</string>
+    <string name="message_sent">Mensaje enviado!</string>
+    <string name="error_sending_message">Hubo un error al enviar el mensaje. \n Prueba de nuevo.</string>
+    <string name="menu_message_label">Enviar mensaje</string>
+    <string name="title_activity_message">Enviar mensaje</string>
+    <string name="title_activity_recipients">Elige destinatarios</string>
+    <string name="empty_reciepients_list">Añade algun amigo</string>
 </resources>
