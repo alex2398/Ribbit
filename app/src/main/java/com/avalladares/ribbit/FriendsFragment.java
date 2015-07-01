@@ -60,7 +60,7 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
                 mProgressBar.setVisibility(View.INVISIBLE);
-                if (e != null) {
+                if (e == null) {
                     mFriends = friends;
                     // Creamos el array del mismo tamaño que lo devuelvo en la query
                     String[] usernames = new String[mFriends.size()];
