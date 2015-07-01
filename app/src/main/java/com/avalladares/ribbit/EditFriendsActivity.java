@@ -74,7 +74,7 @@ public class EditFriendsActivity extends ListActivity {
                     }
 
                     // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditFriendsActivity.this, android.R.layout.simple_list_item_1, usernames);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditFriendsActivity.this, android.R.layout.simple_list_item_checked, usernames);
                     // Primero obtenemos los datos
                     getListView().setAdapter(adapter);
                     // Después marcamos los usuarios con los que el usuario actual tiene relacion
@@ -138,14 +138,6 @@ public class EditFriendsActivity extends ListActivity {
                 public void done(ParseException e) {
                     if (e!=null) {
                         Log.e(TAG,e.getMessage());
-                    } else {
-                        Log.e(TAG, e.getMessage());
-                        AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
-                        builder.setMessage(e.getMessage());
-                        builder.setTitle(getString(R.string.title_error_message));
-                        builder.setPositiveButton(android.R.string.ok, null);
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
                     }
                 }
             });
@@ -158,7 +150,7 @@ public class EditFriendsActivity extends ListActivity {
         mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
-                if (e!=null) {
+                if (e==null) {
                     // Para cada usuario existente en la aplicación
                     for (int i = 0; i < mUsers.size(); i++) {
                         // Guardamos el usuario recorrido (i)

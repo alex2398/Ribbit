@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="username_hint">Usuario</string>
-    <string name="password">Contraseña</string>
+    <string name="username_hint">*Usuario</string>
+    <string name="password">*Contraseña</string>
     <string name="login_button">Entrar</string>
     <string name="singup">Registrarse</string>
-    <string name="email_hint">email@example.com</string>
+    <string name="email_hint">*email@example.com</string>
     <string name="signUp_button">Registrarse</string>
     <string name="action_settings">Configuracion</string>
     <string name="signUp_error_message">Verifica que has introducido un usuario, contraseña y direccion de email!</string>
@@ -24,4 +24,9 @@
     <string name="title_activity_forgot_password">Recuperar contraseña</string>
     <string name="title_activity_login">Entrar</string>
     <string name="title_activity_sign_up">Nuevo usuario</string>
+    <string name="first_name_hint">Nombre</string>
+    <string name="hometown_hint">Ciudad</string>
+    <string name="last_name_hint">Apellido</string>
+    <string name="password_hint">*Contraseña</string>
+    <string name="title_activity_profile">Perfil</string>
 </resources>

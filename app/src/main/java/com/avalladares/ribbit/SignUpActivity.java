@@ -30,6 +30,9 @@ public class SignUpActivity extends ActionBarActivity {
     @Bind(R.id.passwordField) EditText mPasswordField;
     @Bind(R.id.emailField) EditText mEmailField;
     @Bind(R.id.signupProgressBar) ProgressBar mProgressBar;
+    @Bind(R.id.nameField) EditText mNameField;
+    @Bind(R.id.lastNameField) EditText mLastNameField;
+    @Bind(R.id.homeTownField) EditText mHomeTownField;
 
 
     @Override
@@ -44,6 +47,10 @@ public class SignUpActivity extends ActionBarActivity {
         String userName = mUserNameField.getText().toString().trim();
         String userPassword = mPasswordField.getText().toString().trim();
         String userMail = mEmailField.getText().toString().trim();
+        String name = mNameField.getText().toString().trim();
+        String lastName = mLastNameField.getText().toString().trim();
+        String homeTown = mHomeTownField.getText().toString().trim();
+
 
         if (userName.isEmpty() || userPassword.isEmpty() || userMail.isEmpty()) {
             // Bloque para crear un cuadro de dialogo (prefiero toast)
@@ -60,6 +67,9 @@ public class SignUpActivity extends ActionBarActivity {
             newUser.setUsername(userName);
             newUser.setPassword(userPassword);
             newUser.setEmail(userMail);
+            newUser.put(ParseConstants.KEY_FIRSTNAME, name);
+            newUser.put(ParseConstants.KEY_LASTNAME, lastName);
+            newUser.put(ParseConstants.KEY_HOMETOWN,homeTown);
 
             newUser.signUpInBackground(new SignUpCallback() {
 
@@ -86,10 +96,6 @@ public class SignUpActivity extends ActionBarActivity {
 
 
             });
-
-
-
-
         }
 
     }

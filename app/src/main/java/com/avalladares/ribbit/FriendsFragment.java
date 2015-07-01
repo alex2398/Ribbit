@@ -3,6 +3,7 @@ package com.avalladares.ribbit;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ import java.util.List;
  */
 public class FriendsFragment extends android.support.v4.app.ListFragment {
 
-    public static final String TAG=EditFriendsActivity.class.getSimpleName();
+    public static final String TAG = EditFriendsActivity.class.getSimpleName();
 
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
@@ -91,4 +92,16 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
 
 
     }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Intent intent = new Intent(getListView().getContext(),ProfileActivity.class);
+        startActivity(intent);
+
+
+    }
 }
+
+
+
