@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
@@ -24,11 +25,12 @@ import java.util.List;
 public class EditFriendsActivity extends ListActivity {
 
     public static final String TAG=EditFriendsActivity.class.getSimpleName();
-    protected List<ParseUser> mUsers;
+
     private ProgressBar mProgressBar;
+
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
-
+    protected List<ParseUser> mUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,7 @@ public class EditFriendsActivity extends ListActivity {
             @Override
             public void done(List<ParseUser> users, com.parse.ParseException e) {
                 mProgressBar.setVisibility(View.INVISIBLE);
-                if (e==null) {
+                if (e == null) {
                     // Success
                     // Pasamos el array de usuarios parseUser a un array de strings solo con el nombre
                     mUsers = users;
@@ -66,21 +68,23 @@ public class EditFriendsActivity extends ListActivity {
                     String[] usernames = new String[mUsers.size()];
 
                     // Rellenamos el array de nombres
-                    for(int i = 0; i< usernames.length; i++) {
+                    for (int i = 0; i < usernames.length; i++) {
                         ParseUser user = mUsers.get(i);
                         usernames[i] = user.getUsername();
                     }
 
                     // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditFriendsActivity.this, android.R.layout.simple_list_item_1,usernames);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditFriendsActivity.this, android.R.layout.simple_list_item_1, usernames);
+                    // Primero obtenemos los datos
                     getListView().setAdapter(adapter);
-
+                    // Después marcamos los usuarios con los que el usuario actual tiene relacion
+                    addFriendCheckmarks();
 
 
                 } else {
 
                     Log.e(TAG, e.getMessage());
-                    AlertDialog.Builder builder= new AlertDialog.Builder(EditFriendsActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
                     builder.setMessage(e.getMessage());
                     builder.setTitle(getString(R.string.title_error_message));
                     builder.setPositiveButton(android.R.string.ok, null);
@@ -91,12 +95,15 @@ public class EditFriendsActivity extends ListActivity {
         });
     }
 
+    /*
+    No necesitamos el menu en esta pantalla asi que lo borramos
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edit_friends, menu);
-        return true;
+    Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.menu_edit_friends, menu);
+    return true;
     }
+    */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -120,32 +127,63 @@ public class EditFriendsActivity extends ListActivity {
         if (getListView().isItemChecked(position)) {
             // add friend
             mFriendsRelation.add(mUsers.get(position));
-            mCurrentUser.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e!=null) {
-                        Log.e(TAG,e.getMessage());
-                    } else {
 
-                    }
-                }
-            });
         } else {
             // remove friend
-            // add friend
             mFriendsRelation.remove(mUsers.get(position));
+        }
+            // save data to backend
             mCurrentUser.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
                     if (e!=null) {
                         Log.e(TAG,e.getMessage());
                     } else {
-
+                        Log.e(TAG, e.getMessage());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
+                        builder.setMessage(e.getMessage());
+                        builder.setTitle(getString(R.string.title_error_message));
+                        builder.setPositiveButton(android.R.string.ok, null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                     }
                 }
             });
         }
 
+    private void addFriendCheckmarks() {
+
+        // En mFriendsRelation tenemos la lista de ParseUsers que tienen relacion con el usuario actual (mCurrentUser)
+        // Los extraemos con getQuery() y los almacenamos en friends
+        mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> friends, ParseException e) {
+                if (e!=null) {
+                    // Para cada usuario existente en la aplicación
+                    for (int i = 0; i < mUsers.size(); i++) {
+                        // Guardamos el usuario recorrido (i)
+                        ParseUser user = mUsers.get(i);
+                        // y lo comparamos con los usuarios que tienen relacion
+                        for(ParseUser friend : friends) {
+                            if (friend.getObjectId().equals(user.getObjectId())) {
+                                // Si el usuario existente en la aplicación está en la lista de usuarios relacionados,
+                                // marcamos el check
+                                getListView().setItemChecked(i,true);
+                            }
+                        }
+                    }
+                } else {
+                    Log.e(TAG, e.getMessage());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
+                    builder.setMessage(e.getMessage());
+                    builder.setTitle(getString(R.string.title_error_message));
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+                }
+            }
+        });
 
 
     }

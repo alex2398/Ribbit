@@ -22,4 +22,12 @@
         android:layout_height="wrap_content"
         android:id="@android:id/empty"
         android:text="@string/empty_friends_label"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/friendsFragmentProgressBar"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
 </RelativeLayout>
