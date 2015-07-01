@@ -9,6 +9,19 @@
     <string name="action_settings">Configuracion</string>
     <string name="signUp_error_message">Verifica que has introducido un usuario, contraseña y direccion de email!</string>
     <string name="signUp_error_title">Vaya!</string>
-    <string name="login_error_message"/>
-    <string name="menu_logout_label">Logout</string>
+    <string name="login_error_message">Asegúrate de introducir usuario y contraseña!</string>
+    <string name="title_section1">Bandeja de entrada</string>
+    <string name="title_section2">Amigos</string>
+    <string name="empty_inbox_label">No hay nuevos mensajes</string>
+    <string name="empty_friends_label">No has añadido ningun amigo</string>
+    <string name="edit_friends_label">Editar amigos</string>
+    <string name="login_error_title">Vaya!</string>
+    <string name="menu_logout_label">Cerrar sesion</string>
+    <string name="title_error_message">Lo sentimos!</string>
+    <string name="recover_password_button">Recuperar contraseña</string>
+    <string name="check_mail_recover_password">Comprueba tu correo!</string>
+    <string name="title_activity_edit_friends">Editar amigos</string>
+    <string name="title_activity_forgot_password">Recuperar contraseña</string>
+    <string name="title_activity_login">Entrar</string>
+    <string name="title_activity_sign_up">Nuevo usuario</string>
 </resources>

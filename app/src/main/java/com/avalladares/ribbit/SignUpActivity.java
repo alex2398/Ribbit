@@ -7,9 +7,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.parse.Parse;
 import com.parse.ParseUser;
@@ -27,12 +29,12 @@ public class SignUpActivity extends ActionBarActivity {
     @Bind(R.id.usernameField) EditText mUserNameField;
     @Bind(R.id.passwordField) EditText mPasswordField;
     @Bind(R.id.emailField) EditText mEmailField;
+    @Bind(R.id.signupProgressBar) ProgressBar mProgressBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
 
@@ -53,7 +55,7 @@ public class SignUpActivity extends ActionBarActivity {
             dialog.show();
         } else {
             //create new user
-            setSupportProgressBarIndeterminateVisibility(true);
+            mProgressBar.setVisibility(View.VISIBLE);
             ParseUser newUser = new ParseUser();
             newUser.setUsername(userName);
             newUser.setPassword(userPassword);
@@ -63,7 +65,7 @@ public class SignUpActivity extends ActionBarActivity {
 
                 @Override
                 public void done(com.parse.ParseException e) {
-                    setSupportProgressBarIndeterminateVisibility(false);
+                    mProgressBar.setVisibility(View.INVISIBLE);
                     if (e == null) {
                         // Success!!
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
