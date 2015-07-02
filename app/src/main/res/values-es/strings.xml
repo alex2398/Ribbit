@@ -38,4 +38,7 @@
     <string name="file_size_alert">El video seleccionado es demasiado largo!</string>
     <string name="empty_reciepients_list">Choose some friends first</string>
     <string name="Send">Send</string>
+    <string name="error_creating_message">There was an error with the selected file. \n Please select a different one</string>
+    <string name="message_sent">Message sent!</string>
+    <string name="error_sending_message">There was an error sending the message. \n Please try again.</string>
 </resources>

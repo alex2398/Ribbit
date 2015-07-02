@@ -301,7 +301,18 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             }
 
             Intent recipientsIntent = new Intent(this, RecipientsActivity.class);
+            // Pasamos el Uri en el intent
             recipientsIntent.setData(mMediaUri);
+            // Vamos a pasar tambien el tipo de archivo, ya que nos hará falta para crear el mensaje en Parse
+            // en RecipientsActivity
+
+            String fileType;
+            if (requestCode == TAKE_PHOTO_REQUEST || requestCode == PICK_PHOTO_REQUEST){
+                fileType = ParseConstants.TYPE_IMAGE;
+            } else {
+                fileType = ParseConstants.TYPE_VIDEO;
+            }
+            recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
             startActivity(recipientsIntent);
 
         } else if (resultCode!= RESULT_CANCELED) {

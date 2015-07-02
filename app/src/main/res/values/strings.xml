@@ -46,5 +46,8 @@
     <string name="title_activity_recipients">Choose recipients</string>
     <string name="empty_reciepients_list">Choose some friends first</string>
     <string name="Send">Send</string>
+    <string name="error_creating_message">There was an error with the selected file. \n Please select a different one</string>
+    <string name="message_sent">Message sent!</string>
+    <string name="error_sending_message">There was an error sending the message. \n Please try again.</string>
 
 </resources>
