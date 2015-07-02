@@ -72,7 +72,15 @@
         <activity
             android:name=".RecipientsActivity"
             android:label="@string/title_activity_recipients"
-            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.avalladares.ribbit.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MessageActivity"
+            android:label="@string/title_activity_message"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

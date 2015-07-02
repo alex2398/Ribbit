@@ -16,4 +16,9 @@
             android:orderInCategory="200"
             android:icon="@drawable/ic_camera_enhance_white_24dp"
             app:showAsAction="always"/>
+      <item android:id="@+id/action_text_message"
+            android:title="@string/menu_message_label"
+            android:orderInCategory="100"
+            android:icon="@drawable/ic_message_white_24dp"
+            app:showAsAction="always"/>
 </menu>

@@ -367,6 +367,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 AlertDialog dialog =  builder.create();
                 dialog.show();
                 break;
+            case R.id.action_text_message:
+                Intent intent = new Intent(this,MessageActivity.class);
+                startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
