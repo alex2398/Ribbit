@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -61,32 +62,43 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
 
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
-                mProgressBar.setVisibility(View.INVISIBLE);
-                if (e == null) {
-                    mFriends = friends;
-                    // Creamos el array del mismo tamaño que lo devuelvo en la query
-                    String[] usernames = new String[mFriends.size()];
+                if (isAdded()) {        // Comprobamos que el fragment ha sido añadido a la actividad antes de nada (provocaba crashes)
 
-                    // Rellenamos el array de nombres
-                    for (int i = 0; i < usernames.length; i++) {
-                        ParseUser user = mFriends.get(i);
-                        usernames[i] = user.getUsername();
+                    /*Ok, so the problem was that on a device with limited memory, android was destroying mainActivity when switching to the camera,
+                    but not destroying the fragments associated with them. Then on coming back to the mainActivity from the camera app, the code in the done()
+                    method was running before the fragment was reattached to its recreated activity, and so I was getting a nullPointer error when trying to
+                    access the activity. The solution was just to wrap the code in the done() method with an if(isAdded()) to check if the fragment
+                    is attached to it's activity before trying to access it like so:*/
+
+                    mProgressBar.setVisibility(View.INVISIBLE);
+                    if (e == null) {
+                        mFriends = friends;
+                        // Creamos el array del mismo tamaño que lo devuelvo en la query
+                        String[] usernames = new String[mFriends.size()];
+
+                        // Rellenamos el array de nombres
+                        int i = 0;
+                        for (ParseUser user : mFriends) {
+                            usernames[i] = user.getUsername();
+                            i++;
+                        }
+
+                        // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getListView().getContext(), android.R.layout.simple_list_item_1, usernames);
+                        // Primero obtenemos los datos
+                        setListAdapter(adapter);
+
+
+                    } else {
+                        Log.e(TAG, e.getMessage());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
+                        builder.setMessage(e.getMessage());
+                        builder.setTitle(getString(R.string.title_error_message));
+                        builder.setPositiveButton(android.R.string.ok, null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
                     }
-
-                    // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getListView().getContext(), android.R.layout.simple_list_item_1, usernames);
-                    // Primero obtenemos los datos
-                    getListView().setAdapter(adapter);
-
-                } else {
-                    Log.e(TAG, e.getMessage());
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
-                    builder.setMessage(e.getMessage());
-                    builder.setTitle(getString(R.string.title_error_message));
-                    builder.setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-
                 }
             }
         });
@@ -97,12 +109,13 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(getListView().getContext(),ProfileActivity.class);
+        Intent intent = new Intent(getListView().getContext(), ProfileActivity.class);
         startActivity(intent);
 
 
     }
 }
+
 
 
 

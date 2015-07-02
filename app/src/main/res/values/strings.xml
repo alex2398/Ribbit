@@ -34,11 +34,17 @@
     <string name="error_external_storage">There was a proble accessing \n your device\'s external storage</string>
     <string name="fail_create_directory">Failed to create directory</string>
     <string name="general_error">Sorry, there was an error!</string>
+    <string name="video_length_warning">You must select a video with size less than 10Mb</string>
+    <string name="error_selecting_file">There was a problem with the selected file</string>
+    <string name="file_size_alert">The selected file is too large!</string>
     <string-array name="camera_choices">
         <item>Take Picture</item>
         <item>Take Video</item>
         <item>Choose Picture</item>
         <item>Choose Video</item>
     </string-array>
+    <string name="title_activity_recipients">Choose recipients</string>
+    <string name="empty_reciepients_list">Choose some friends first</string>
+    <string name="Send">Send</string>
 
 </resources>

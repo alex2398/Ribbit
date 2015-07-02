@@ -10,7 +10,7 @@
     <string name="signUp_error_message">Verifica que has introducido un usuario, contraseña y direccion de email!</string>
     <string name="signUp_error_title">Vaya!</string>
     <string name="login_error_message">Asegúrate de introducir usuario y contraseña!</string>
-    <string name="title_section1">Bandeja de entrada</string>
+    <string name="title_section1">Entrada</string>
     <string name="title_section2">Amigos</string>
     <string name="empty_inbox_label">No hay nuevos mensajes</string>
     <string name="empty_friends_label">No has añadido ningun amigo</string>
@@ -31,6 +31,11 @@
     <string name="title_activity_profile">Perfil</string>
     <string name="menu_camera_label">Camara</string>
     <string name="error_external_storage">Hubo un problema al acceder \n al almacenamiento externo</string>
-    <string name="fail_create_directory">Failed to create directory</string>
-    <string name="general_error">Sorry, there was an error!</string>
+    <string name="fail_create_directory">Error al crear el directorio</string>
+    <string name="general_error">Lo siento, hubo un error!</string>
+    <string name="video_length_warning">Debes seleccionar un video con tamaño menor de 10 Mb</string>
+    <string name="error_selecting_file">Hubo un problema con el archivo seleccionado</string>
+    <string name="file_size_alert">El video seleccionado es demasiado largo!</string>
+    <string name="empty_reciepients_list">Choose some friends first</string>
+    <string name="Send">Send</string>
 </resources>
