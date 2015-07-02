@@ -30,5 +30,15 @@
     <string name="hometown_hint">Home Town</string>
     <string name="last_name_hint">Last Name</string>
     <string name="title_activity_profile">Profile </string>
+    <string name="menu_camera_label">Camera</string>
+    <string name="error_external_storage">There was a proble accessing \n your device\'s external storage</string>
+    <string name="fail_create_directory">Failed to create directory</string>
+    <string name="general_error">Sorry, there was an error!</string>
+    <string-array name="camera_choices">
+        <item>Take Picture</item>
+        <item>Take Video</item>
+        <item>Choose Picture</item>
+        <item>Choose Video</item>
+    </string-array>
 
 </resources>

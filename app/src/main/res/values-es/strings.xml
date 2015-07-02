@@ -29,4 +29,8 @@
     <string name="last_name_hint">Apellido</string>
     <string name="password_hint">*Contraseña</string>
     <string name="title_activity_profile">Perfil</string>
+    <string name="menu_camera_label">Camara</string>
+    <string name="error_external_storage">Hubo un problema al acceder \n al almacenamiento externo</string>
+    <string name="fail_create_directory">Failed to create directory</string>
+    <string name="general_error">Sorry, there was an error!</string>
 </resources>
