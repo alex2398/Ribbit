@@ -4,10 +4,10 @@
     <string name="title_section2">Friends</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_login">Login</string>
-    <string name="username_hint">*Username</string>
-    <string name="password_hint">*Password</string>
-    <string name="login_button">Login</string>
-    <string name="singup">Sign Up</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button">SIGN IN</string>
+    <string name="signup">Don\'t have an account? Sign Up!!</string>
     <string name="title_activity_sign_up">Sign Up</string>
     <string name="email_hint">*email@example.com</string>
     <string name="signUp_button">Sign Up</string>
@@ -51,5 +51,14 @@
     <string name="error_sending_message">There was an error sending the message. \n Please try again.</string>
     <string name="menu_message_label">Send Message</string>
     <string name="title_activity_message">Send Message</string>
+    <string name="title_activity_view_image" translatable="false">Ribbit</string>
+    <string name="send_date">Send </string>
+    <string name="new_text_message_title">Nuevo mensaje</string>
+    <string name="title_activity_view_text">Text message</string>
+    <string name="message_from">Mensaje de </string>
+    <string name="password">Password</string>
+    <string name="contentDescriptionBackground">Ribbit Frog Background Image</string>
+    <string name="forget_password">Forgot your password?</string>
+    <string name="subtitle">A self-destructing messages App!</string>
 
 </resources>

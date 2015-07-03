@@ -16,9 +16,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseAnalytics;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.io.File;
@@ -27,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener {
@@ -56,6 +64,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     // Uri : Uniform Resorce Identifier : identifica recursos en el sistema
     protected Uri mMediaUri;
+
+
+
+
+
 
     SectionsPagerAdapter mSectionsPagerAdapter;
 
@@ -124,10 +137,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     }
 
 
+
     /*Also to keep the app from crashing at the point of hitting
-    the send button we have to save the mMediaUri of mainActivity
-    in the onSaveInstanceState(Bundle bundle) method to keep from
-    losing it when the activity is destroyed:*/
+        the send button we have to save the mMediaUri of mainActivity
+        in the onSaveInstanceState(Bundle bundle) method to keep from
+        losing it when the activity is destroyed:*/
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

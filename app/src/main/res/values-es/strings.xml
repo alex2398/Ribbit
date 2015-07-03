@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="username_hint">*Usuario</string>
-    <string name="password">*Contraseña</string>
-    <string name="login_button">Entrar</string>
+    <string name="username_hint">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login_button">ENTRAR</string>
     <string name="singup">Registrarse</string>
     <string name="email_hint">*email@example.com</string>
     <string name="signUp_button">Registrarse</string>
@@ -27,7 +27,7 @@
     <string name="first_name_hint">Nombre</string>
     <string name="hometown_hint">Ciudad</string>
     <string name="last_name_hint">Apellido</string>
-    <string name="password_hint">*Contraseña</string>
+    <string name="password_hint">Contraseña</string>
     <string name="title_activity_profile">Perfil</string>
     <string name="menu_camera_label">Camara</string>
     <string name="error_external_storage">Hubo un problema al acceder \n al almacenamiento externo</string>
@@ -44,4 +44,12 @@
     <string name="title_activity_message">Enviar mensaje</string>
     <string name="title_activity_recipients">Elige destinatarios</string>
     <string name="empty_reciepients_list">Añade algun amigo</string>
+    <string name="send_date">Enviado el </string>
+    <string name="new_text_message_title">Nuevo mensaje</string>
+    <string name="message_from">Mensaje de </string>
+    <string name="title_activity_view_text">Mensaje de texto</string>
+    <string name="contentDescriptionBackground">Ribbit Frog Background Image</string>
+    <string name="signup">No tienes cuenta? Registrate!</string>
+    <string name="forget_password">Olvidaste tu constraseña?</string>
+    <string name="subtitle">Mensajes auto-destruibles!</string>
 </resources>

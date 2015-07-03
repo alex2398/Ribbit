@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -231,6 +232,7 @@ public class RecipientsActivity extends ActionBarActivity {
                 // Creamos el archivo Parse y lo añadimos al mensaje
                 ParseFile file = new ParseFile(fileName, fileBytes);
                 message.put(ParseConstants.KEY_FILE, file);
+
             }   return message;
         }
     }
@@ -246,6 +248,7 @@ public class RecipientsActivity extends ActionBarActivity {
     }
 
     protected void send(ParseObject message) {
+
         message.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

@@ -1,5 +1,7 @@
 package com.avalladares.ribbit;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Intent;
@@ -24,7 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class SignUpActivity extends ActionBarActivity {
+public class SignUpActivity extends Activity {
 
     @Bind(R.id.usernameField) EditText mUserNameField;
     @Bind(R.id.passwordField) EditText mPasswordField;
@@ -39,6 +41,7 @@ public class SignUpActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
         ButterKnife.bind(this);
 
     }
