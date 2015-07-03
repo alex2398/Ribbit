@@ -44,6 +44,7 @@ public class RecipientsActivity extends ActionBarActivity {
 
     protected Uri mMediaUri;
     protected String mFileType;
+    protected String mTextMessage;
 
     private ProgressBar mProgressBar;
     @Override
@@ -60,6 +61,10 @@ public class RecipientsActivity extends ActionBarActivity {
 
         mMediaUri = getIntent().getData();
         mFileType = getIntent().getExtras().getString(ParseConstants.KEY_FILE_TYPE);
+        if (mFileType.equals(ParseConstants.TYPE_TEXT)) {
+            mTextMessage = getIntent().getExtras().getString(ParseConstants.TYPE_TEXT);
+        }
+
 
         mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
@@ -182,6 +187,7 @@ public class RecipientsActivity extends ActionBarActivity {
                 } else {
                     send(message);
                     finish();
+
                 }
 
                 return true;
@@ -202,25 +208,30 @@ public class RecipientsActivity extends ActionBarActivity {
 
         /* NOTA: Helper Classes y la lib IOApache en https://github.com/treehouse/treehouse_android_utilities */
 
-        // Convertimos el archivo a byte mediante la helper class FileHelper, pasandole el Uri
-        byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);
-        // Si devuelve nulo hubo un error al crear ese archivo pero lo controlamos para que la aplicacion no termine
-        // y el usuario pueda elegir otro archivo
-        if (fileBytes == null) {
-            return null;
-        } else {
-            if (mFileType.equals(ParseConstants.TYPE_IMAGE)) {
-                // Si es una imagen, la comprimimos
-                fileBytes = FileHelper.reduceImageForUpload(fileBytes);
-            }
-
-            // Obtenemos el nombre del archivo
-            String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
-            // Creamos el archivo Parse y lo añadimos al mensaje
-            ParseFile file = new ParseFile(fileName, fileBytes);
-            message.put(ParseConstants.KEY_FILE,file);
-
+        if (mFileType.equals(ParseConstants.TYPE_TEXT)) {
+            message.put(ParseConstants.KEY_TEXT, mTextMessage);
             return message;
+        } else {
+
+
+            // Convertimos el archivo a byte mediante la helper class FileHelper, pasandole el Uri
+            byte[] fileBytes = FileHelper.getByteArrayFromFile(this, mMediaUri);
+            // Si devuelve nulo hubo un error al crear ese archivo pero lo controlamos para que la aplicacion no termine
+            // y el usuario pueda elegir otro archivo
+            if (fileBytes == null) {
+                return null;
+            } else {
+                if (mFileType.equals(ParseConstants.TYPE_IMAGE)) {
+                    // Si es una imagen, la comprimimos
+                    fileBytes = FileHelper.reduceImageForUpload(fileBytes);
+                }
+
+                // Obtenemos el nombre del archivo
+                String fileName = FileHelper.getFileName(this, mMediaUri, mFileType);
+                // Creamos el archivo Parse y lo añadimos al mensaje
+                ParseFile file = new ParseFile(fileName, fileBytes);
+                message.put(ParseConstants.KEY_FILE, file);
+            }   return message;
         }
     }
 

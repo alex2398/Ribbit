@@ -9,25 +9,28 @@
                 tools:context="com.avalladares.ribbit.MessageActivity">
 
     <TextView
-        android:text="@string/hello_world"
+        android:text="Texto a enviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"/>
+        android:id="@+id/sendTextMessageLabel"
+        android:layout_marginBottom="20dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_below="@+id/textView"
+        android:id="@+id/messageEditText"
+        android:layout_below="@+id/sendTextMessageLabel"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:hint="Escribe el mensaje"
+        android:layout_marginBottom="20dp"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_below="@+id/editText"
+        android:text="Enviar"
+        android:id="@+id/sendTextButton"
+        android:layout_below="@+id/messageEditText"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

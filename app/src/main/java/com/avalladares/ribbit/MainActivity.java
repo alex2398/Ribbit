@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     public static final int MEDIA_TYPE_IMAGE = 4;
     public static final int MEDIA_TYPE_VIDEO = 5;
 
+    public static final int SEND_TEXT = 6;
+
     public static final int FILE_SIZE_LIMIT = 1024 * 1024 * 10; // 10 Mb
 
     public static String KEY_MEDIA_URI;
@@ -199,8 +201,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
             // 1. Obtener el directorio de almacenamiento externo
             String appName = getString(R.string.app_name);
+
             File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                     Environment.DIRECTORY_PICTURES),appName);
+
+            //String extStorageDirectory = Environment.getExternalStorageDirectory().getAbsolutePath();
 
 
             // 2. Crear un subdirectorio
@@ -309,9 +314,12 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             String fileType;
             if (requestCode == TAKE_PHOTO_REQUEST || requestCode == PICK_PHOTO_REQUEST){
                 fileType = ParseConstants.TYPE_IMAGE;
-            } else {
+            } else if (requestCode == TAKE_VIDEO_REQUEST || requestCode == PICK_VIDEO_REQUEST) {
                 fileType = ParseConstants.TYPE_VIDEO;
+            } else {
+                fileType = ParseConstants.TYPE_TEXT;
             }
+
             recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE, fileType);
             startActivity(recipientsIntent);
 
@@ -370,6 +378,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             case R.id.action_text_message:
                 Intent intent = new Intent(this,MessageActivity.class);
                 startActivity(intent);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
