@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 style="@style/AuthBackground"
-                tools:context="com.avalladares.ribbit.SignUpActivity">
+                tools:context="com.avalladares.ribbit.ui.SignUpActivity">
 
     <ImageView
         android:id="@+id/backgroundImage"
@@ -62,32 +62,32 @@
 
 
 
-        <ImageView
-            android:id="@+id/buttonDivider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editTextLayout"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/button_divider"
-            android:contentDescription="@string/buttonDivider_label"/>
+    <ImageView
+        android:id="@+id/buttonDivider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextLayout"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/button_divider"
+        android:contentDescription="@string/buttonDivider_label"/>
 
-        <Button
-            android:text="@string/signUp_button"
-            android:id="@+id/signInButton"
-            android:layout_marginRight="0dp"
-            style="@style/AuthButton"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/editTextLayout"
-            android:layout_toLeftOf="@id/buttonDivider"/>
+    <Button
+        android:text="@string/signUp_button"
+        android:id="@+id/signInButton"
+        android:layout_marginRight="0dp"
+        style="@style/AuthButton"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextLayout"
+        android:layout_toLeftOf="@id/buttonDivider"/>
 
-        <Button
-            android:text="@string/cancel_button_label"
-            android:id="@+id/cancelButton"
-            android:layout_marginLeft="0dp"
-            style="@style/AuthButton"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/editTextLayout"
-            android:layout_toRightOf="@id/buttonDivider"/>
+    <Button
+        android:text="@string/cancel_button_label"
+        android:id="@+id/cancelButton"
+        android:layout_marginLeft="0dp"
+        style="@style/AuthButton"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/editTextLayout"
+        android:layout_toRightOf="@id/buttonDivider"/>
 
 
     <ProgressBar

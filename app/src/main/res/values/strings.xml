@@ -9,7 +9,7 @@
     <string name="login_button">SIGN IN</string>
     <string name="signup">Don\'t have an account? Sign Up!!</string>
     <string name="title_activity_sign_up">Sign Up</string>
-    <string name="email_hint">*email@example.com</string>
+    <string name="email_hint">email@example.com</string>
     <string name="signUp_button">SIGN UP</string>
     <string name="signUp_error_title">Oops!</string>
     <string name="signUp_error_message">Please make sure you enter a username, password and email address!</string>
@@ -24,7 +24,7 @@
     <string name="hello_world" translatable="false">Hello world!</string>
     <string name="title_activity_forgot_password">Forgot Password</string>
     <string name="title_error_message">We\'re sorry!</string>
-    <string name="recover_password_button">Recover Password</string>
+    <string name="recover_password_button">RECOVER PASSWORD</string>
     <string name="check_mail_recover_password">Check your mail inbox</string>
     <string name="first_name_hint">First Name</string>
     <string name="hometown_hint">Home Town</string>
@@ -62,5 +62,6 @@
     <string name="subtitle">A self-destructing messages App!</string>
     <string name="cancel_button_label">CANCEL</string>
     <string name="buttonDivider_label">Button divider</string>
+    <string name="error_mail">Must enter a valid email</string>
 
 </resources>

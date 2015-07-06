@@ -1,10 +1,15 @@
-package com.avalladares.ribbit;
+package com.avalladares.ribbit.adapters;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.content.Context;
+
+import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.ui.FriendsFragment;
+import com.avalladares.ribbit.ui.InboxFragment;
+
 import java.util.Locale;
 
 /**

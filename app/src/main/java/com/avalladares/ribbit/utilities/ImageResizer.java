@@ -1,6 +1,4 @@
-package com.avalladares.ribbit;
-
-import java.io.ByteArrayOutputStream;
+package com.avalladares.ribbit.utilities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

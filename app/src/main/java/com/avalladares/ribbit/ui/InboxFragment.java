@@ -1,19 +1,22 @@
-package com.avalladares.ribbit;
+package com.avalladares.ribbit.ui;
 
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
+import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.adapters.MessageAdapter;
+import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -21,9 +24,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import java.net.PasswordAuthentication;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,11 +37,19 @@ public class InboxFragment extends ListFragment {
     private ProgressBar mProgressBar;
     // Variable para almacenar la lista de mensajes
     protected List<ParseObject> mMessages;
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_inbox, container, false);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
+        mSwipeRefreshLayout.setColorSchemeColors(R.color.swipeRefresh1,R.color.swipeRefresh2,R.color.swipeRefresh3,R.color.swipeRefresh4);
+
+
         return rootView;
     }
 
@@ -48,47 +57,56 @@ public class InboxFragment extends ListFragment {
     public void onResume() {
         super.onResume();
 
+        retrieveMessages();
+
+    }
+
+    private void retrieveMessages() {
         mProgressBar = (ProgressBar) getActivity().findViewById(R.id.progressBarInbox);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseConstants.CLASS_MESSAGES);
         query.whereEqualTo(ParseConstants.KEY_RECIPIENT_IDS, ParseUser.getCurrentUser().getObjectId());
         query.addDescendingOrder(ParseConstants.KEY_CREATED_AT);
 
-        mProgressBar.setVisibility(View.VISIBLE);
+
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> messages, ParseException e) {
-                mProgressBar.setVisibility(View.INVISIBLE);
-                if (e == null) {
-                    // Success
-                    // Encontramos mensajes para el usuario
-                    mMessages = messages;
-
-                    // Creamos el adaptador de nuestro tipo custom (MessageAdapter) para nuestro layout personalizado (messageitem.xml)
-
-                    // Este condicional se usa para mantener la posicion de la pantalla al volver a la activity (metodo refill del adaptador)
-                    if (getListView().getAdapter() == null) {
-                        MessageAdapter adapter = new MessageAdapter(getListView().getContext(), mMessages);
-                        setListAdapter(adapter);
-                    } else {
-                        // Refill the adapter!
-                        ((MessageAdapter)getListView().getAdapter()).refill(mMessages);
-                    }
 
 
+                if (mSwipeRefreshLayout.isRefreshing()) {
+                    mSwipeRefreshLayout.setRefreshing(false);
                 } else {
+                    if (e == null) {
+                        // Success
+                        // Encontramos mensajes para el usuario
+                        mMessages = messages;
 
-                    Log.e(TAG, e.getMessage());
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
-                    builder.setMessage(e.getMessage());
-                    builder.setTitle(getString(R.string.title_error_message));
-                    builder.setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                        // Creamos el adaptador de nuestro tipo custom (MessageAdapter) para nuestro layout personalizado (messageitem.xml)
+
+                        // Este condicional se usa para mantener la posicion de la pantalla al volver a la activity (metodo refill del adaptador)
+                        if (getListView().getAdapter() == null) {
+                            MessageAdapter adapter = new MessageAdapter(getListView().getContext(), mMessages);
+                            setListAdapter(adapter);
+                        } else {
+                            // Refill the adapter!
+                            ((MessageAdapter) getListView().getAdapter()).refill(mMessages);
+                        }
+
+
+                    } else {
+
+                        Log.e(TAG, e.getMessage());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
+                        builder.setMessage(e.getMessage());
+                        builder.setTitle(getString(R.string.title_error_message));
+                        builder.setPositiveButton(android.R.string.ok, null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
                 }
             }
         });
-
     }
 
     @Override
@@ -155,6 +173,13 @@ public class InboxFragment extends ListFragment {
 
         }
     }
+
+    OnRefreshListener mOnRefreshListener = new OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            retrieveMessages();
+        }
+    };
 }
 
 

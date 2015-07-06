@@ -1,20 +1,11 @@
-package com.avalladares.ribbit;
+package com.avalladares.ribbit.ui;
 
-import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ImageView;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
-import com.parse.ParseObject;
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.utilities.ParseConstants;
 
 
 public class ViewTextActivity extends ActionBarActivity {

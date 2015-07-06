@@ -4,7 +4,7 @@
     <string name="password">Contraseña</string>
     <string name="login_button">ENTRAR</string>
     <string name="singup">Registrarse</string>
-    <string name="email_hint">*email@example.com</string>
+    <string name="email_hint">email@example.com</string>
     <string name="action_settings">Configuracion</string>
     <string name="signUp_error_message">Verifica que has introducido un usuario, contraseña y direccion de email!</string>
     <string name="signUp_error_title">Vaya!</string>
@@ -17,7 +17,7 @@
     <string name="login_error_title">Vaya!</string>
     <string name="menu_logout_label">Cerrar sesion</string>
     <string name="title_error_message">Lo sentimos!</string>
-    <string name="recover_password_button">Recuperar contraseña</string>
+    <string name="recover_password_button">RECUPERAR CONTRASEÑA</string>
     <string name="check_mail_recover_password">Comprueba tu correo!</string>
     <string name="title_activity_edit_friends">Editar amigos</string>
     <string name="title_activity_forgot_password">Recuperar contraseña</string>
@@ -49,9 +49,10 @@
     <string name="title_activity_view_text">Mensaje de texto</string>
     <string name="contentDescriptionBackground">Ribbit Frog Background Image</string>
     <string name="signup">No tienes cuenta? Registrate!</string>
-    <string name="forget_password">Olvidaste tu constraseña?</string>
+    <string name="forget_password">Olvidaste tu contraseña?</string>
     <string name="subtitle">Mensajes auto-destruibles!</string>
     <string name="signUp_button">REGISTRATE</string>
     <string name="cancel_button_label">CANCELAR</string>
     <string name="buttonDivider_label">Button divider</string>
+    <string name="error_mail">Debes introducir un email valido</string>
 </resources>

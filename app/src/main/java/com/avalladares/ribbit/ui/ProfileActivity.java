@@ -1,17 +1,12 @@
-package com.avalladares.ribbit;
+package com.avalladares.ribbit.ui;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
-import com.parse.Parse;
+import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.ParseUser;
-
-import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

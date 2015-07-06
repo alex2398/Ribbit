@@ -1,18 +1,17 @@
-package com.avalladares.ribbit;
+package com.avalladares.ribbit.ui;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;

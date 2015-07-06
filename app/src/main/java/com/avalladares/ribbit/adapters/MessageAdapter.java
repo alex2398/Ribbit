@@ -1,4 +1,4 @@
-package com.avalladares.ribbit;
+package com.avalladares.ribbit.adapters;
 
 import android.content.Context;
 import android.text.format.DateUtils;
@@ -9,11 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.Parse;
+import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.ParseObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -72,9 +72,9 @@ public class MessageAdapter extends ArrayAdapter<ParseObject>{
 
         // segun el tipo de mensaje, elegimos un icono
         if (message.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_IMAGE)) {
-            holder.iconImageView.setImageResource(R.drawable.ic_action_picture);
+            holder.iconImageView.setImageResource(R.drawable.ic_picture);
         } else if (message.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_VIDEO)) {
-            holder.iconImageView.setImageResource(R.drawable.ic_action_play_over_video);
+            holder.iconImageView.setImageResource(R.drawable.ic_video);
         } else if (message.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_TEXT)){ // mensaje de texto
             holder.iconImageView.setImageResource(R.drawable.ic_chat_bubble_outline_black_24dp);
         }
@@ -86,7 +86,7 @@ public class MessageAdapter extends ArrayAdapter<ParseObject>{
         long date_of_send = message.getCreatedAt().getTime();
         long now = System.currentTimeMillis();
 
-        CharSequence relativeTime = DateUtils.getRelativeTimeSpanString(date_of_send,now, 0,DateUtils.FORMAT_ABBREV_ALL);
+        String relativeTime = DateUtils.getRelativeTimeSpanString(date_of_send,now,DateUtils.SECOND_IN_MILLIS).toString();
 
 
         holder.sendLabel.setText(relativeTime);

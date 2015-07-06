@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 style="@style/AuthBackground"
-                tools:context="com.avalladares.ribbit.LoginActivity"
+                tools:context="com.avalladares.ribbit.ui.LoginActivity"
     >
 
     <ImageView

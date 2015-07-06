@@ -1,14 +1,16 @@
-package com.avalladares.ribbit;
+package com.avalladares.ribbit.ui;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.utilities.ParseConstants;
  /* Add a button next to the camera in the Action Bar that starts a new Activity with an EditText and a button.
     Capture the text the user enters and take them to the recipients activity to choose recipients. Then adapt
     the code to send a the text as a message instead of the current path for photos or videos.*/

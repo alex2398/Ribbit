@@ -1,12 +1,11 @@
-package com.avalladares.ribbit;
+package com.avalladares.ribbit.ui;
 
 import android.net.Uri;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.ImageView;
 
+import com.avalladares.ribbit.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.Timer;

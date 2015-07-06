@@ -1,4 +1,4 @@
-package com.avalladares.ribbit;
+package com.avalladares.ribbit.utilities;
 
 /**
  * Created by avalladares on 01/07/2015.
