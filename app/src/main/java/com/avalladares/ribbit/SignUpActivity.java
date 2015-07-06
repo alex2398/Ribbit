@@ -45,6 +45,10 @@ public class SignUpActivity extends Activity {
         ButterKnife.bind(this);
 
     }
+    @OnClick(R.id.cancelButton)
+    public void cancel() {
+        finish();
+    }
     @OnClick(R.id.signInButton)
     public void sign_up() {
         String userName = mUserNameField.getText().toString().trim();

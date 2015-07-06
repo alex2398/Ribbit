@@ -7,11 +7,13 @@ import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -65,11 +67,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     // Uri : Uniform Resorce Identifier : identifica recursos en el sistema
     protected Uri mMediaUri;
 
-
-
-
-
-
     SectionsPagerAdapter mSectionsPagerAdapter;
 
     // The {@link ViewPager} that will host the section contents.
@@ -103,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE);
+        actionBar.setIcon(R.drawable.ic_launcher);
+
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Create the adapter that will return a fragment for each of the three
@@ -130,8 +130,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             // the TabListener interface, as the callback (listener) for when
             // this tab is selected.
             actionBar.addTab(
+
                     actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(i))
+                            // Establecemos el icono para cada tab
+                            .setIcon(mSectionsPagerAdapter.getIcon(i))
+                            //.setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
         }
     }

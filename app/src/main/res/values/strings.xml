@@ -10,7 +10,7 @@
     <string name="signup">Don\'t have an account? Sign Up!!</string>
     <string name="title_activity_sign_up">Sign Up</string>
     <string name="email_hint">*email@example.com</string>
-    <string name="signUp_button">Sign Up</string>
+    <string name="signUp_button">SIGN UP</string>
     <string name="signUp_error_title">Oops!</string>
     <string name="signUp_error_message">Please make sure you enter a username, password and email address!</string>
     <string name="ok" translatable="false">OK</string>
@@ -60,5 +60,7 @@
     <string name="contentDescriptionBackground">Ribbit Frog Background Image</string>
     <string name="forget_password">Forgot your password?</string>
     <string name="subtitle">A self-destructing messages App!</string>
+    <string name="cancel_button_label">CANCEL</string>
+    <string name="buttonDivider_label">Button divider</string>
 
 </resources>

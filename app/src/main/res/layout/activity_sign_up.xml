@@ -2,81 +2,93 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
+                style="@style/AuthBackground"
                 tools:context="com.avalladares.ribbit.SignUpActivity">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/usernameField"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/username_hint"/>
+    <ImageView
+        android:id="@+id/backgroundImage"
+        style="@style/AuthBackgroundImage"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:text="@string/app_name"
+        style="@style/AuthTitle"/>
+
+    <TextView
+        android:id="@+id/subtitle"
+        style="@style/AuthSubtitle"/>
+
+    <LinearLayout
+        android:id="@+id/editTextLayout"
+        style="@style/AuthFieldContainer">
+
+        <EditText
+            android:id="@+id/usernameField"
+            android:hint="@string/username_hint"
+            style="@style/AuthEditText">
+            <requestFocus/>
+        </EditText>
+
+        <EditText
+            android:id="@+id/passwordField"
+            android:hint="@string/password"
+            style="@style/AuthEditText"
+            android:inputType="textPassword"/>
+
+        <EditText
+
+            android:id="@+id/emailField"
+            android:hint="@string/email_hint"
+            style="@style/AuthEditText"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/nameField"
+            android:hint="@string/first_name_hint"
+            style="@style/AuthEditText"/>
+
+        <EditText
+            android:id="@+id/lastNameField"
+            style="@style/AuthEditText"
+            android:hint="@string/last_name_hint"/>
+
+        <EditText
+            android:id="@+id/homeTownField"
+            android:hint="@string/hometown_hint"
+            style="@style/AuthEditText"/>
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/passwordField"
-        android:layout_below="@+id/usernameField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/password_hint"/>
+    </LinearLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/emailField"
-        android:layout_below="@+id/passwordField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/email_hint"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/nameField"
-        android:layout_below="@+id/emailField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/first_name_hint"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/lastNameField"
-        android:layout_below="@+id/nameField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/last_name_hint"/>
+        <ImageView
+            android:id="@+id/buttonDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextLayout"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/button_divider"
+            android:contentDescription="@string/buttonDivider_label"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/homeTownField"
-        android:layout_below="@+id/lastNameField"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/hometown_hint"/>
+        <Button
+            android:text="@string/signUp_button"
+            android:id="@+id/signInButton"
+            android:layout_marginRight="0dp"
+            style="@style/AuthButton"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editTextLayout"
+            android:layout_toLeftOf="@id/buttonDivider"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/signUp_button"
-        android:id="@+id/signInButton"
-        android:layout_below="@+id/homeTownField"
-        android:layout_centerHorizontal="true"/>
+        <Button
+            android:text="@string/cancel_button_label"
+            android:id="@+id/cancelButton"
+            android:layout_marginLeft="0dp"
+            style="@style/AuthButton"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/editTextLayout"
+            android:layout_toRightOf="@id/buttonDivider"/>
+
 
     <ProgressBar
         android:layout_width="wrap_content"

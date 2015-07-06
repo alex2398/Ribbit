@@ -5,7 +5,6 @@
     <string name="login_button">ENTRAR</string>
     <string name="singup">Registrarse</string>
     <string name="email_hint">*email@example.com</string>
-    <string name="signUp_button">Registrarse</string>
     <string name="action_settings">Configuracion</string>
     <string name="signUp_error_message">Verifica que has introducido un usuario, contraseña y direccion de email!</string>
     <string name="signUp_error_title">Vaya!</string>
@@ -52,4 +51,7 @@
     <string name="signup">No tienes cuenta? Registrate!</string>
     <string name="forget_password">Olvidaste tu constraseña?</string>
     <string name="subtitle">Mensajes auto-destruibles!</string>
+    <string name="signUp_button">REGISTRATE</string>
+    <string name="cancel_button_label">CANCELAR</string>
+    <string name="buttonDivider_label">Button divider</string>
 </resources>
