@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -47,15 +48,18 @@ public class RecipientsActivity extends ActionBarActivity {
     protected Uri mMediaUri;
     protected String mFileType;
     protected String mTextMessage;
-
+    protected GridView mGridView;
     private ProgressBar mProgressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipients);
+        setContentView(R.layout.user_grid);
 
-        mListView = (ListView) findViewById(R.id.listFriends);
-        mEmptyText = (TextView) findViewById(R.id.listEmpty);
+
+
+        TextView emptyTextView = (TextView)findViewById(android.R.id.empty);
+        mGridView.setEmptyView(emptyTextView);
+
         mMenuItem = (MenuItem) findViewById(R.id.sendTo);
 
         // Obtenemos el path del archivo mediante el data que hemos pasado en el intent
@@ -89,8 +93,6 @@ public class RecipientsActivity extends ActionBarActivity {
         mCurrentUser = ParseUser.getCurrentUser();
         mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
 
-        mProgressBar = (ProgressBar) this.findViewById(R.id.recipientsFragmentProgressBar);
-        mProgressBar.setVisibility(View.VISIBLE);
 
         ParseQuery<ParseUser> query = mFriendsRelation.getQuery();
         query.addAscendingOrder(ParseConstants.KEY_USERNAME);
@@ -101,7 +103,6 @@ public class RecipientsActivity extends ActionBarActivity {
             public void done(List<ParseUser> friends, ParseException e) {
 
 
-                mProgressBar.setVisibility(View.INVISIBLE);
 
                 if (friends.size() == 0) {
                     mEmptyText.setVisibility(View.VISIBLE);

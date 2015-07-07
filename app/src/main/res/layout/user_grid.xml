@@ -8,7 +8,12 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".MainActivity$PlaceholderFragment">
 
-
+<!-- Los atributos  numColumns="autoFit"
+                    columnWidth,
+                    stretchMode,
+                    gravity="center"
+                    nos permiten adaptar el grid al ancho de la pantalla
+                    para diversos dispositivos -->
     <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,10 +21,14 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:numColumns="3"
+        android:numColumns="auto_fit"
+        android:columnWidth="90dp"
+        android:stretchMode="columnWidth"
         android:horizontalSpacing="@dimen/users_grid_spacing"
         android:verticalSpacing="@dimen/users_grid_spacing"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="match_parent"     

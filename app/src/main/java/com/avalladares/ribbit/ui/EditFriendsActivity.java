@@ -1,15 +1,20 @@
 package com.avalladares.ribbit.ui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.adapters.UsersAdapter;
 import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -21,7 +26,7 @@ import com.parse.SaveCallback;
 import java.util.List;
 
 
-public class EditFriendsActivity extends ListActivity {
+public class EditFriendsActivity extends Activity {
 
     public static final String TAG=EditFriendsActivity.class.getSimpleName();
 
@@ -30,14 +35,20 @@ public class EditFriendsActivity extends ListActivity {
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
     protected List<ParseUser> mUsers;
+    protected GridView mGridView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_friends);
+        setContentView(R.layout.user_grid);
 
 
-        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        mGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE);
+        mGridView = (GridView)findViewById(R.id.friendsGrid);
+
+        TextView emptyTextView = (TextView)findViewById(android.R.id.empty);
+        mGridView.setEmptyView(emptyTextView);
     }
 
     @Override
@@ -48,8 +59,6 @@ public class EditFriendsActivity extends ListActivity {
         mFriendsRelation= mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
 
 
-        mProgressBar = (ProgressBar) findViewById(R.id.searchFriendsProgressBar);
-
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.orderByAscending(ParseConstants.KEY_USERNAME);
         query.setLimit(1000);
@@ -58,7 +67,7 @@ public class EditFriendsActivity extends ListActivity {
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> users, com.parse.ParseException e) {
-                mProgressBar.setVisibility(View.INVISIBLE);
+
                 if (e == null) {
                     // Success
                     // Pasamos el array de usuarios parseUser a un array de strings solo con el nombre
@@ -73,11 +82,13 @@ public class EditFriendsActivity extends ListActivity {
                     }
 
                     // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditFriendsActivity.this, android.R.layout.simple_list_item_checked, usernames);
-                    // Primero obtenemos los datos
-                    getListView().setAdapter(adapter);
-                    // Después marcamos los usuarios con los que el usuario actual tiene relacion
-                    addFriendCheckmarks();
+                    if (mGridView.getAdapter() == null) {
+                        UsersAdapter adapter = new UsersAdapter(EditFriendsActivity.this, mUsers);
+                        mGridView.setAdapter(adapter);
+                    } else {
+                        // Refill it!
+                        ((UsersAdapter)mGridView.getAdapter()).refill(mUsers);
+                    }
 
 
                 } else {
@@ -106,6 +117,8 @@ public class EditFriendsActivity extends ListActivity {
 
 
 
+
+/*
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
@@ -128,7 +141,7 @@ public class EditFriendsActivity extends ListActivity {
                 }
             });
         }
-
+*/
     private void addFriendCheckmarks() {
 
         // En mFriendsRelation tenemos la lista de ParseUsers que tienen relacion con el usuario actual (mCurrentUser)
@@ -146,7 +159,7 @@ public class EditFriendsActivity extends ListActivity {
                             if (friend.getObjectId().equals(user.getObjectId())) {
                                 // Si el usuario existente en la aplicación está en la lista de usuarios relacionados,
                                 // marcamos el check
-                                getListView().setItemChecked(i,true);
+                                mGridView.setItemChecked(i, true);
                             }
                         }
                     }
