@@ -78,10 +78,12 @@ public class EditFriendsActivity extends ActionBarActivity {
                     String[] usernames = new String[mUsers.size()];
 
                     // Rellenamos el array de nombres
-                    for (int i = 0; i < usernames.length; i++) {
-                        ParseUser user = mUsers.get(i);
+                    int i = 0;
+                    for(ParseUser user : mUsers) {
                         usernames[i] = user.getUsername();
+                        i++;
                     }
+
 
                     // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
                     if (mGridView.getAdapter() == null) {
@@ -119,32 +121,33 @@ public class EditFriendsActivity extends ActionBarActivity {
 
 
 
-protected AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ImageView checkImageView = (ImageView)findViewById(R.id.checkImageView);
+    protected AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            // OJO!! Hay que hacer referencia a la view, si no no encuentra el item correcto
+            ImageView checkImageView = (ImageView)view.findViewById(R.id.checkImageView);
 
-        if (mGridView.isItemChecked(position)) {
-            // add friend
-            mFriendsRelation.add(mUsers.get(position));
-            checkImageView.setVisibility(View.VISIBLE);
+            if (mGridView.isItemChecked(position)) {
+                // add friend
+                mFriendsRelation.add(mUsers.get(position));
+                checkImageView.setVisibility(View.VISIBLE);
 
-        } else {
-            // remove friend
-            mFriendsRelation.remove(mUsers.get(position));
-            checkImageView.setVisibility(View.INVISIBLE);
-        }
-        // save data to backend
-        mCurrentUser.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e!=null) {
-                    Log.e(TAG,e.getMessage());
-                }
+            } else {
+                // remove friend
+                mFriendsRelation.remove(mUsers.get(position));
+                checkImageView.setVisibility(View.INVISIBLE);
             }
-        });
-    }
-};
+            // save data to backend
+            mCurrentUser.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e!=null) {
+                        Log.e(TAG,e.getMessage());
+                    }
+                }
+            });
+        }
+    };
 
     private void addFriendCheckmarks() {
 

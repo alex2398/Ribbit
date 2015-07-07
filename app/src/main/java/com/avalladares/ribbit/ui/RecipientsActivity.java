@@ -1,6 +1,9 @@
 package com.avalladares.ribbit.ui;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,17 +17,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.adapters.UsersAdapter;
 import com.avalladares.ribbit.utilities.FileHelper;
 import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
@@ -42,23 +48,25 @@ public class RecipientsActivity extends ActionBarActivity {
     protected ParseUser mCurrentUser;
     protected List<ParseUser> mFriends;
     protected MenuItem mMenuItem;
-    protected ListView mListView;
     protected TextView mEmptyText;
+    protected ProgressBar mProgressBar;
 
     protected Uri mMediaUri;
     protected String mFileType;
     protected String mTextMessage;
     protected GridView mGridView;
-    private ProgressBar mProgressBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_grid);
 
-
-
+        mGridView = (GridView)findViewById(R.id.friendsGrid);
+        mProgressBar = (ProgressBar)findViewById(R.id.friendsFragmentProgressBar);
         TextView emptyTextView = (TextView)findViewById(android.R.id.empty);
         mGridView.setEmptyView(emptyTextView);
+        mGridView.setOnItemClickListener(mOnItemClickListener);
 
         mMenuItem = (MenuItem) findViewById(R.id.sendTo);
 
@@ -71,28 +79,17 @@ public class RecipientsActivity extends ActionBarActivity {
             mTextMessage = getIntent().getExtras().getString(ParseConstants.TYPE_TEXT);
         }
 
+        mGridView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
-        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (getCheckedItemCount() > 0) {
-                    mMenuItem.setVisible(true);
-                } else {
-                    mMenuItem.setVisible(false);
-                }
-            }
-        });
     }
 
     @Override
     protected void onResume () {
             super.onResume();
 
+        mProgressBar.setVisibility(View.VISIBLE);
         mCurrentUser = ParseUser.getCurrentUser();
         mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
-
 
         ParseQuery<ParseUser> query = mFriendsRelation.getQuery();
         query.addAscendingOrder(ParseConstants.KEY_USERNAME);
@@ -101,12 +98,7 @@ public class RecipientsActivity extends ActionBarActivity {
 
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
-
-
-
-                if (friends.size() == 0) {
-                    mEmptyText.setVisibility(View.VISIBLE);
-                }
+                mProgressBar.setVisibility(View.INVISIBLE);
 
                 if (e == null) {
                     mFriends = friends;
@@ -121,10 +113,14 @@ public class RecipientsActivity extends ActionBarActivity {
                     }
 
                     // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(RecipientsActivity.this, android.R.layout.simple_list_item_checked, usernames);
+                    if (mGridView.getAdapter() == null) {
+                        UsersAdapter adapter = new UsersAdapter(RecipientsActivity.this, mFriends);
+                        mGridView.setAdapter(adapter);
+                    } else {
+                        // Refill it!
+                        ((UsersAdapter)mGridView.getAdapter()).refill(mFriends);
+                    }
 
-                    // Primero obtenemos los datos
-                    mListView.setAdapter(adapter);
 
 
                 } else {
@@ -144,25 +140,13 @@ public class RecipientsActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_recipients, menu);
-        mMenuItem = menu.getItem(0);
-        return true;
-    }
 
-    public int getCheckedItemCount() {
-        ListView listView = mListView;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            return listView.getCheckedItemCount();
-        }
 
-        SparseBooleanArray checkedItems = listView.getCheckedItemPositions();
-        int count = 0;
-        for (int i = 0, size = checkedItems.size(); i < size; ++i) {
-            if (checkedItems.valueAt(i)) {
-                count++;
-            }
-        }
-        return count;
+            getMenuInflater().inflate(R.menu.menu_recipients, menu);
+            mMenuItem = menu.getItem(0);
+            return true;
+
+
     }
 
     /*  Este e el metodo que usamos para hacer clic en el boton enviar (al ser una clase que extiende
@@ -197,6 +181,8 @@ public class RecipientsActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     protected ParseObject createMessage() {
         /* Metodo para crear el mensaje en Parse, lo creamos pasandole lo que deseamos que contenga
@@ -241,8 +227,8 @@ public class RecipientsActivity extends ActionBarActivity {
 
     protected ArrayList<String> getRecipientsIds() {
         ArrayList<String> recipientsId = new ArrayList<String>();
-        for (int i=0; i < mListView.getCount(); i++) {
-            if (mListView.isItemChecked(i)) {
+        for (int i=0; i < mGridView.getCount(); i++) {
+            if (mGridView.isItemChecked(i)) {
                 recipientsId.add(mFriends.get(i).getObjectId());
             }
         }
@@ -256,6 +242,7 @@ public class RecipientsActivity extends ActionBarActivity {
             public void done(ParseException e) {
                 if (e==null) {
                     Toast.makeText(RecipientsActivity.this, getString(R.string.message_sent),Toast.LENGTH_LONG).show();
+                    sendPushNotifications();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
                     builder.setMessage(getString(R.string.error_sending_message));
@@ -269,5 +256,34 @@ public class RecipientsActivity extends ActionBarActivity {
         });
     }
 
+    protected AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (mGridView.getCheckedItemCount() > 0) {
+                mMenuItem.setVisible(true);
+            } else {
+                mMenuItem.setVisible(false);
+            }
+
+            ImageView checkImageView = (ImageView)findViewById(R.id.checkImageView);
+
+            if (mGridView.isItemChecked(position)) {
+                // add the recipient
+                mFriendsRelation.add(mFriends.get(position));
+                checkImageView.setVisibility(View.VISIBLE);
+
+            } else {
+                // remove the recipient
+                mFriendsRelation.remove(mFriends.get(position));
+                checkImageView.setVisibility(View.INVISIBLE);
+            }
+        }
+    };
+
+    protected void sendPushNotifications() {
+        ParseQuery<ParseInstallation> query = ParseInstallation.getQuery();
+        query.whereContainedIn(ParseConstants.KEY_USER_ID,getRecipientsIds());
+
+    }
 }
 

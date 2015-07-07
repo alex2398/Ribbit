@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.RibbitApplication;
 import com.parse.LogInCallback;
 import com.parse.ParseUser;
 
@@ -77,6 +78,10 @@ public class LoginActivity extends Activity {
                     mProgressBar.setVisibility(View.INVISIBLE);
                     if (parseUser != null) {
                         // Success!!
+
+                        // Instalamos las notificaciones para ese usuario
+                        RibbitApplication.updateParseInstallation(parseUser);
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

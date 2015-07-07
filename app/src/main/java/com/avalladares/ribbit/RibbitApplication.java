@@ -4,7 +4,10 @@ import android.app.Application;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.Parse;
+import com.parse.ParseInstallation;
+import com.parse.ParseUser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -23,6 +26,13 @@ public class RibbitApplication extends Application{
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "pIlXyyqk073KKogbMbz5pPqMJ6v1F3TiVG36S3Bz", "iG6gsvPsP9reNVYomwQbG5LeEnQetA53rfezrmC9");
+        ParseInstallation.getCurrentInstallation().saveInBackground();
 
+    }
+
+    public static void updateParseInstallation(ParseUser user) {
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put(ParseConstants.KEY_USER_ID,user.getObjectId());
+        installation.saveInBackground();
     }
 }

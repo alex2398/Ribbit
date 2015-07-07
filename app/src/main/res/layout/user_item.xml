@@ -5,16 +5,18 @@
                 android:background="@android:color/white">
 
 
+
     <ImageView
         android:id="@+id/userImageView"
-        android:src="@drawable/avatar_empty"
-        style="@style/GridImage"/>
+        style="@style/GridImage"
+        android:src="@drawable/avatar_empty" />
 
     <ImageView
         android:id="@+id/checkImageView"
+        style="@style/GridImage"
         android:src="@drawable/avatar_selected"
-        android:visibility="invisible"
-        style="@style/GridImage"/>
+        android:visibility="invisible" />
+
 
     <TextView
         android:layout_width="wrap_content"

@@ -73,6 +73,7 @@ public class UsersAdapter extends ArrayAdapter<ParseUser>{
         ParseUser user = mUsers.get(position);
         String email = user.getEmail().toLowerCase();
 
+
         // Obtenemos la imagen de gravatar
 
         if (email.equals("")) {
@@ -91,6 +92,8 @@ public class UsersAdapter extends ArrayAdapter<ParseUser>{
                     .into(holder.userImageView);
 
         }
+
+        holder.nameLabel.setText(user.getUsername());
 
         // Obtenemos el gridview padre (parametro parent) para comprobar si los items estan marcados o no
         // Si lo estan añadimos el imageview de check, si no lo quitamos (visible o invisible)

@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.avalladares.ribbit.R;
@@ -33,6 +34,7 @@ public class ProfileActivity extends ActionBarActivity {
     @Bind(R.id.userField) TextView mUserField;
     @Bind(R.id.userHeadLabel) TextView mUserHeadLabel;
     @Bind(R.id.imageView) ImageView mAvatar;
+    @Bind(R.id.profileProgressBar) ProgressBar mProgressBar;
 
     protected ParseUser mUserFound = new ParseUser();
 
@@ -48,12 +50,12 @@ public class ProfileActivity extends ActionBarActivity {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", user);
 
-
+        mProgressBar.setVisibility(View.VISIBLE);
         query.findInBackground(new FindCallback<ParseUser>() {
 
             @Override
             public void done(List<ParseUser> user_found, ParseException e) {
-
+                mProgressBar.setVisibility(View.INVISIBLE);
 
                 if (e == null) {
                     mUserFound = user_found.get(0);
