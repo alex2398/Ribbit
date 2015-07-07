@@ -36,8 +36,12 @@
         <item name="actionBarWidgetTheme">@style/Theme.Ribbit.Widget</item>
         <item name="android:editTextBackground">@drawable/apptheme_edit_text_holo_light</item>
         <item name="android:listViewStyle">@style/Theme.Ribbit.LightPurpleBackground</item>
-        <item name="android:gridViewStyle">@style/Theme.Ribbit.LightPurpleBackground</item>
+        <item name="android:gridViewStyle">@style/Theme.Ribbit.LightPurpleBackground.GridStyle</item>
 
+    </style>
+
+    <style name="Theme.Ribbit.LightPurpleBackground.GridStyle">
+        <item name="android:padding">@dimen/users_grid_spacing</item>
     </style>
 
     <style name="Theme.Ribbit.LightPurpleBackground">

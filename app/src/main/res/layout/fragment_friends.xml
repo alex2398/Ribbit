@@ -9,13 +9,17 @@
                 tools:context=".MainActivity$PlaceholderFragment">
 
 
-    <ListView
+    <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@android:id/list"
+        android:id="@+id/friendsGrid"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:numColumns="3"
+        android:horizontalSpacing="@dimen/users_grid_spacing"
+        android:verticalSpacing="@dimen/users_grid_spacing"
+        android:clipToPadding="false"/>
 
     <TextView
         android:layout_width="match_parent"     

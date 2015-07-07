@@ -1,17 +1,17 @@
 package com.avalladares.ribbit.ui;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.GridView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.adapters.UsersAdapter;
 import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -24,13 +24,15 @@ import java.util.List;
 /**
  * Created by avalladares on 01/07/2015.
  */
-public class FriendsFragment extends android.support.v4.app.ListFragment {
+public class FriendsFragment extends android.support.v4.app.Fragment {
 
     public static final String TAG = EditFriendsActivity.class.getSimpleName();
 
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
     protected List<ParseUser> mFriends;
+    protected GridView mGridView;
+
 
     private ProgressBar mProgressBar;
 
@@ -38,7 +40,11 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
+        mGridView = (GridView)rootView.findViewById(R.id.friendsGrid);
 
+        // Creamos la variable para empty ya que en Fragment no funciona automaticamente como en Fragmentlist
+        TextView emptyTextView = (TextView)rootView.findViewById(android.R.id.empty);
+        mGridView.setEmptyView(emptyTextView);
 
         return rootView;
     }
@@ -71,25 +77,20 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
                     mProgressBar.setVisibility(View.INVISIBLE);
                     if (e == null) {
                         mFriends = friends;
-                        // Creamos el array del mismo tamaño que lo devuelvo en la query
-                        String[] usernames = new String[mFriends.size()];
-
-                        // Rellenamos el array de nombres
-                        int i = 0;
-                        for (ParseUser user : mFriends) {
-                            usernames[i] = user.getUsername();
-                            i++;
-                        }
 
                         // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getListView().getContext(), android.R.layout.simple_list_item_1, usernames);
-                        // Primero obtenemos los datos
-                        setListAdapter(adapter);
+                        if (mGridView.getAdapter() == null) {
+                            UsersAdapter adapter = new UsersAdapter(getActivity(), mFriends);
+                            mGridView.setAdapter(adapter);
+                        } else {
+                            // Refill it!
+                            ((UsersAdapter)mGridView.getAdapter()).refill(mFriends);
+                        }
 
 
                     } else {
                         Log.e(TAG, e.getMessage());
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getListView().getContext());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                         builder.setMessage(e.getMessage());
                         builder.setTitle(getString(R.string.title_error_message));
                         builder.setPositiveButton(android.R.string.ok, null);
@@ -98,20 +99,24 @@ public class FriendsFragment extends android.support.v4.app.ListFragment {
 
                     }
                 }
+
             }
         });
 
 
     }
 
+
+    /*
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        Intent intent = new Intent(getListView().getContext(), ProfileActivity.class);
+    public void onItemClick(ListView l, View v, int position, long id) {
+        super.onItemClick(l, v, position, id);
+        Intent intent = new Intent(getActivity(), ProfileActivity.class);
         startActivity(intent);
 
 
     }
+    */
 }
 
 
