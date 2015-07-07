@@ -1,12 +1,15 @@
 package com.avalladares.ribbit.ui;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -15,9 +18,11 @@ import com.avalladares.ribbit.adapters.UsersAdapter;
 import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -40,11 +45,12 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.user_grid, container, false);
-        mGridView = (GridView)rootView.findViewById(R.id.friendsGrid);
+        mGridView = (GridView) rootView.findViewById(R.id.friendsGrid);
 
         // Creamos la variable para empty ya que en Fragment no funciona automaticamente como en Fragmentlist
-        TextView emptyTextView = (TextView)rootView.findViewById(android.R.id.empty);
+        TextView emptyTextView = (TextView) rootView.findViewById(android.R.id.empty);
         mGridView.setEmptyView(emptyTextView);
+        mGridView.setOnItemClickListener(mOnItemClickListener);
 
         return rootView;
     }
@@ -84,7 +90,7 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
                             mGridView.setAdapter(adapter);
                         } else {
                             // Refill it!
-                            ((UsersAdapter)mGridView.getAdapter()).refill(mFriends);
+                            ((UsersAdapter) mGridView.getAdapter()).refill(mFriends);
                         }
 
 
@@ -106,17 +112,20 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
 
     }
 
+    // Al hacer click en un item vamos a su ficha
+    protected AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-    /*
-    @Override
-    public void onItemClick(ListView l, View v, int position, long id) {
-        super.onItemClick(l, v, position, id);
-        Intent intent = new Intent(getActivity(), ProfileActivity.class);
-        startActivity(intent);
+            String user= mFriends.get(position).getUsername();
+            Intent intent = new Intent(getActivity(), ProfileActivity.class);
+            intent.putExtra("username",user);
+            startActivity(intent);
 
+        }
 
-    }
-    */
+    };
+
 }
 
 

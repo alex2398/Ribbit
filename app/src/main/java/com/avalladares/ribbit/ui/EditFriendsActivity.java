@@ -3,12 +3,15 @@ package com.avalladares.ribbit.ui;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,11 +29,9 @@ import com.parse.SaveCallback;
 import java.util.List;
 
 
-public class EditFriendsActivity extends Activity {
+public class EditFriendsActivity extends ActionBarActivity {
 
     public static final String TAG=EditFriendsActivity.class.getSimpleName();
-
-    private ProgressBar mProgressBar;
 
     protected ParseRelation<ParseUser> mFriendsRelation;
     protected ParseUser mCurrentUser;
@@ -43,9 +44,10 @@ public class EditFriendsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_grid);
 
-
-        mGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE);
         mGridView = (GridView)findViewById(R.id.friendsGrid);
+        mGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE);
+        mGridView.setOnItemClickListener(mOnItemClickListener);
+
 
         TextView emptyTextView = (TextView)findViewById(android.R.id.empty);
         mGridView.setEmptyView(emptyTextView);
@@ -63,7 +65,7 @@ public class EditFriendsActivity extends Activity {
         query.orderByAscending(ParseConstants.KEY_USERNAME);
         query.setLimit(1000);
 
-        mProgressBar.setVisibility(View.VISIBLE);
+
         query.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> users, com.parse.ParseException e) {
@@ -117,31 +119,33 @@ public class EditFriendsActivity extends Activity {
 
 
 
-
-/*
+protected AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ImageView checkImageView = (ImageView)findViewById(R.id.checkImageView);
 
-        if (getListView().isItemChecked(position)) {
+        if (mGridView.isItemChecked(position)) {
             // add friend
             mFriendsRelation.add(mUsers.get(position));
+            checkImageView.setVisibility(View.VISIBLE);
 
         } else {
             // remove friend
             mFriendsRelation.remove(mUsers.get(position));
+            checkImageView.setVisibility(View.INVISIBLE);
         }
-            // save data to backend
-            mCurrentUser.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e!=null) {
-                        Log.e(TAG,e.getMessage());
-                    }
+        // save data to backend
+        mCurrentUser.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e!=null) {
+                    Log.e(TAG,e.getMessage());
                 }
-            });
-        }
-*/
+            }
+        });
+    }
+};
+
     private void addFriendCheckmarks() {
 
         // En mFriendsRelation tenemos la lista de ParseUsers que tienen relacion con el usuario actual (mCurrentUser)

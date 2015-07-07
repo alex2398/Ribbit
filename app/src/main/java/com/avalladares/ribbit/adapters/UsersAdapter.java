@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -63,6 +64,7 @@ public class UsersAdapter extends ArrayAdapter<ParseUser>{
             holder = new ViewHolder();
             holder.userImageView = (ImageView) convertView.findViewById(R.id.userImageView);
             holder.nameLabel = (TextView) convertView.findViewById(R.id.nameLabel);
+            holder.checkImageView = (ImageView) convertView.findViewById(R.id.checkImageView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -90,20 +92,15 @@ public class UsersAdapter extends ArrayAdapter<ParseUser>{
 
         }
 
+        // Obtenemos el gridview padre (parametro parent) para comprobar si los items estan marcados o no
+        // Si lo estan añadimos el imageview de check, si no lo quitamos (visible o invisible)
 
-
-        // segun el tipo de mensaje, elegimos un icono
-/*
-        if (user.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_IMAGE)) {
-            holder.iconImageView.setImageResource(R.drawable.ic_picture);
-        } else if (user.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_VIDEO)) {
-            holder.iconImageView.setImageResource(R.drawable.ic_video);
-        } else if (user.getString(ParseConstants.KEY_FILE_TYPE).equals(ParseConstants.TYPE_TEXT)){ // mensaje de texto
-            holder.iconImageView.setImageResource(R.drawable.ic_chat_bubble_outline_black_24dp);
+        GridView gridView = (GridView)parent;
+        if (gridView.isItemChecked(position)) {
+            holder.checkImageView.setVisibility(View.VISIBLE);
+        } else {
+            holder.checkImageView.setVisibility(View.INVISIBLE);
         }
-*/
-        holder.nameLabel.setText(user.getUsername());
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
 
         return convertView;
     }
@@ -111,6 +108,7 @@ public class UsersAdapter extends ArrayAdapter<ParseUser>{
     private static class ViewHolder {
         public ImageView userImageView;
         public TextView nameLabel;
+        public ImageView checkImageView;
 
 
     }
