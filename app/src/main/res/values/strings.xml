@@ -71,5 +71,6 @@
     <string name="hometown_profile">Home Town</string>
     <string name="singup">Sign Up</string>
     <string name="destroy_message">DESTROY</string>
+    <string name="profile_back">VOLVER</string>
 
 </resources>

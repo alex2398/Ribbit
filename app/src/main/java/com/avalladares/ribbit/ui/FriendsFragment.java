@@ -2,6 +2,7 @@ package com.avalladares.ribbit.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,7 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
     protected ParseUser mCurrentUser;
     protected List<ParseUser> mFriends;
     protected GridView mGridView;
-
+    protected SwipeRefreshLayout mSwipeRefreshLayout;
 
     private ProgressBar mProgressBar;
 
@@ -48,6 +49,12 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
         mGridView.setEmptyView(emptyTextView);
         mGridView.setOnItemClickListener(mOnItemClickListener);
 
+        // Al ser un fragment, para añadir la vista tenemos que referenciar rootView
+        mSwipeRefreshLayout = (SwipeRefreshLayout)rootView.findViewById(R.id.swipeRefreshLayout);
+        // mOnRefreshListener --> Accion que hace al refrescar (metodo mas abajo)
+        mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
+        mSwipeRefreshLayout.setColorSchemeColors(R.color.swipeRefresh1, R.color.swipeRefresh2, R.color.swipeRefresh3, R.color.swipeRefresh4);
+
         return rootView;
     }
 
@@ -55,16 +62,21 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
     public void onResume() {
         super.onResume();
 
+        retrieveUsers();
+
+    }
+
+    private void retrieveUsers() {
+
         mCurrentUser = ParseUser.getCurrentUser();
         mFriendsRelation = mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
-
-        mProgressBar = (ProgressBar) getActivity().findViewById(R.id.friendsFragmentProgressBar);
-        mProgressBar.setVisibility(View.VISIBLE);
+        
 
         ParseQuery<ParseUser> query = mFriendsRelation.getQuery();
         query.addAscendingOrder(ParseConstants.KEY_USERNAME);
 
         query.findInBackground(new FindCallback<ParseUser>() {
+
 
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
@@ -76,31 +88,33 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
                     access the activity. The solution was just to wrap the code in the done() method with an if(isAdded()) to check if the fragment
                     is attached to it's activity before trying to access it like so:*/
 
-                    mProgressBar.setVisibility(View.INVISIBLE);
-                    if (e == null) {
-                        mFriends = friends;
 
-                        // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
-                        if (mGridView.getAdapter() == null) {
-                            UsersAdapter adapter = new UsersAdapter(getActivity(), mFriends);
-                            mGridView.setAdapter(adapter);
-                        } else {
-                            // Refill it!
-                            ((UsersAdapter) mGridView.getAdapter()).refill(mFriends);
-                        }
-
-
+                    if (mSwipeRefreshLayout.isRefreshing()) {
+                        mSwipeRefreshLayout.setRefreshing(false);
                     } else {
-                        Log.e(TAG, e.getMessage());
+                        if (e == null) {
+                            mFriends = friends;
+
+                            // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
+                            if (mGridView.getAdapter() == null) {
+                                UsersAdapter adapter = new UsersAdapter(getActivity(), mFriends);
+                                mGridView.setAdapter(adapter);
+                            } else {
+                                // Refill it!
+                                ((UsersAdapter) mGridView.getAdapter()).refill(mFriends);
+                            }
 
 
+                        } else {
+                            Log.e(TAG, e.getMessage());
+
+
+                        }
                     }
                 }
 
             }
         });
-
-
     }
 
     // Al hacer click en un item vamos a su ficha
@@ -115,6 +129,13 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
 
         }
 
+    };
+
+    SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            retrieveUsers();
+        }
     };
 
 }

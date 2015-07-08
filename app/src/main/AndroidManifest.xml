@@ -100,7 +100,7 @@
         <activity
             android:name=".ui.MessageActivity"
             android:label="@string/title_activity_message"
-            android:theme="@style/Theme.Ribbit"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.MinWidth"
             android:parentActivityName=".ui.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -11,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.RibbitApplication;
 import com.avalladares.ribbit.adapters.UsersAdapter;
 import com.avalladares.ribbit.utilities.ParseConstants;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -115,8 +118,6 @@ public class EditFriendsActivity extends ActionBarActivity {
     }
     */
 
-
-
     protected AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -127,11 +128,19 @@ public class EditFriendsActivity extends ActionBarActivity {
                 // add friend
                 mFriendsRelation.add(mUsers.get(position));
                 checkImageView.setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.ZoomIn)
+                        .duration(200)
+                        .playOn(view.findViewById(R.id.checkImageView));
 
             } else {
                 // remove friend
                 mFriendsRelation.remove(mUsers.get(position));
-                checkImageView.setVisibility(View.INVISIBLE);
+                YoYo.with(Techniques.ZoomOut)
+                        .duration(200)
+                        .playOn(view.findViewById(R.id.checkImageView));
+                //checkImageView.setVisibility(View.INVISIBLE);
+
+
             }
             // save data to backend
             mCurrentUser.saveInBackground(new SaveCallback() {
@@ -152,13 +161,13 @@ public class EditFriendsActivity extends ActionBarActivity {
         mFriendsRelation.getQuery().findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> friends, ParseException e) {
-                if (e==null) {
+                if (e == null) {
                     // Para cada usuario existente en la aplicación
                     for (int i = 0; i < mUsers.size(); i++) {
                         // Guardamos el usuario recorrido (i)
                         ParseUser user = mUsers.get(i);
                         // y lo comparamos con los usuarios que tienen relacion
-                        for(ParseUser friend : friends) {
+                        for (ParseUser friend : friends) {
                             if (friend.getObjectId().equals(user.getObjectId())) {
                                 // Si el usuario existente en la aplicación está en la lista de usuarios relacionados,
                                 // marcamos el check
@@ -172,4 +181,6 @@ public class EditFriendsActivity extends ActionBarActivity {
             }
         });
     }
+
+
 }

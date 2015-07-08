@@ -10,13 +10,23 @@
                 tools:context="com.avalladares.ribbit.ui.ProfileActivity">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        style="@style/GridImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="fitXY"
-        />
+    <LinearLayout
+        android:id="@+id/imagedrawer"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="5dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            style="@style/GridImage"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/avatar_empty"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,105 +38,103 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/userHeadLabel"
         android:layout_marginBottom="10dp"
-        android:layout_below="@+id/imageView"/>
+        android:layout_below="@+id/imagedrawer"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         android:layout_below="@+id/userHeadLabel"
-
         android:id="@+id/LinearContainerProfile">
-    <LinearLayout
-        style="@style/AuthFieldContainer"
-        android:padding="5dp"
-        android:layout_margin="1dp"
-        android:layout_weight="2"
-        android:id="@+id/labelsLayout">
+
+        <LinearLayout
+            style="@style/AuthFieldContainer"
+            android:padding="5dp"
+            android:layout_margin="1dp"
+            android:layout_weight="2"
+            android:id="@+id/labelsLayout">
 
 
 
 
-        <TextView
-            android:text="@string/first_name_profile"
-            android:id="@+id/firstNameLabel"
-            style="@style/profile_label"/>
+            <TextView
+                android:text="@string/first_name_profile"
+                android:id="@+id/firstNameLabel"
+                style="@style/profile_label"/>
 
-        <TextView
-            android:text="@string/last_name_profile"
-            android:id="@+id/lastNameLabel"
-            style="@style/profile_label"/>
+            <TextView
+                android:text="@string/last_name_profile"
+                android:id="@+id/lastNameLabel"
+                style="@style/profile_label"/>
 
-        <TextView
-            android:text="@string/username_profile"
-            android:id="@+id/userNameLabel"
-            style="@style/profile_label"/>
+            <TextView
+                android:text="@string/username_profile"
+                android:id="@+id/userNameLabel"
+                style="@style/profile_label"/>
 
-        <TextView
-            android:text="@string/email_profile"
-            android:id="@+id/emailLabel"
-            style="@style/profile_label"/>
+            <TextView
+                android:text="@string/email_profile"
+                android:id="@+id/emailLabel"
+                style="@style/profile_label"/>
 
-        <TextView
-            android:text="@string/hometown_profile"
-            android:id="@+id/hometownLabel"
-            style="@style/profile_label"/>
+            <TextView
+                android:text="@string/hometown_profile"
+                android:id="@+id/hometownLabel"
+                style="@style/profile_label"/>
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/AuthFieldContainer"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:layout_margin="1dp"
+            android:id="@+id/dataLayout"
+            android:divider="@android:drawable/divider_horizontal_textfield">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/firstNameField"
+                style="@style/profile_label"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lastNameField"
+                style="@style/profile_label"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/userField"
+                style="@style/profile_label"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/emailField"
+                style="@style/profile_label"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/homeTownField"
+                style="@style/profile_label"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        style="@style/AuthFieldContainer"
-        android:layout_weight="1"
-        android:padding="5dp"
-        android:layout_margin="1dp"
-        android:id="@+id/dataLayout"
-        android:divider="@android:drawable/divider_horizontal_textfield">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/firstNameField"
-            android:text="TEST"
-            style="@style/profile_label"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/lastNameField"
-            android:text="TEST"
-            style="@style/profile_label"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/userField"
-            android:text="TEST"
-            style="@style/profile_label"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/emailField"
-            android:text="TEST"
-            style="@style/profile_label"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TEST"
-            android:id="@+id/homeTownField"
-            style="@style/profile_label"
-            />
-    </LinearLayout>
-    </LinearLayout>
     <Button
         android:layout_width="150dp"
-        android:text="VOLVER"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_back"
         android:id="@+id/cancelButton"
-        style="@style/AuthButton"
+        android:background="@color/ligh_purple_background"
         android:layout_below="@+id/LinearContainerProfile"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>

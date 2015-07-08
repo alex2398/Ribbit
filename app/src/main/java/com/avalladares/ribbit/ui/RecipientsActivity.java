@@ -18,9 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.RibbitApplication;
 import com.avalladares.ribbit.adapters.UsersAdapter;
 import com.avalladares.ribbit.utilities.FileHelper;
 import com.avalladares.ribbit.utilities.ParseConstants;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -264,11 +267,17 @@ public class RecipientsActivity extends ActionBarActivity {
                 // add the recipient
                 mFriendsRelation.add(mFriends.get(position));
                 checkImageView.setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.ZoomIn)
+                        .duration(200)
+                        .playOn(view.findViewById(R.id.checkImageView));
 
             } else {
                 // remove the recipient
                 mFriendsRelation.remove(mFriends.get(position));
-                checkImageView.setVisibility(View.INVISIBLE);
+                YoYo.with(Techniques.ZoomOut)
+                        .duration(200)
+                        .playOn(view.findViewById(R.id.checkImageView));
+
             }
         }
     };

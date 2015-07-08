@@ -62,4 +62,5 @@
     <string name="email_profile">eMail</string>
     <string name="hometown_profile">Ciudad</string>
     <string name="destroy_message">DESTRUIR</string>
+    <string name="profile_back">VOLVER</string>
 </resources>

@@ -49,8 +49,8 @@
         <item name="android:divider">@null</item>
     </style>
 
-    <style name="Theme.Ribbit.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:src">@drawable/ic_stat_ic_launcher</item>
+    <style name="Theme.Ribbit.Overflow" parent="Widget.AppCompat.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_ic_menu_white_48dp</item>
     </style>
 
     <style name="ActionBar.Solid.Ribbit" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
@@ -58,7 +58,7 @@
         <item name="backgroundStacked">@drawable/ab_stacked_solid_ribbit</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_ribbit</item>
         <item name="progressBarStyle">@style/ProgressBar.Ribbit</item>
-        <item name="android:titleTextStyle">@style/ActionBar.Solid.Ribbit.TitleTextStyle</item>
+        <item name="android:titleTextStyle">@color/text_color</item>
     </style>
 
     <style name="ActionBar.Solid.Ribbit.TitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">

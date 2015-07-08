@@ -146,6 +146,7 @@ public class InboxFragment extends ListFragment {
                 Intent intent = new Intent(getActivity(), ViewTextActivity.class);
                 intent.putExtra(ParseConstants.TYPE_TEXT,textMessage);
                 intent.putExtra(ParseConstants.KEY_SENDER_ID,message.get(ParseConstants.KEY_SENDER_ID).toString());
+                intent.putExtra(ParseConstants.KEY_SENDER_NAME,message.get(ParseConstants.KEY_SENDER_NAME).toString());
                 startActivity(intent);
             }
         }
