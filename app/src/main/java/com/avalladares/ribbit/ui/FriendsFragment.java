@@ -1,6 +1,5 @@
 package com.avalladares.ribbit.ui;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -18,11 +16,9 @@ import com.avalladares.ribbit.adapters.UsersAdapter;
 import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import java.util.List;
 
@@ -96,12 +92,7 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
 
                     } else {
                         Log.e(TAG, e.getMessage());
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setMessage(e.getMessage());
-                        builder.setTitle(getString(R.string.title_error_message));
-                        builder.setPositiveButton(android.R.string.ok, null);
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
+
 
                     }
                 }

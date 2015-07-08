@@ -1,24 +1,25 @@
 package com.avalladares.ribbit.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.avalladares.ribbit.R;
 import com.avalladares.ribbit.utilities.ParseConstants;
+import com.parse.ParseUser;
  /* Add a button next to the camera in the Action Bar that starts a new Activity with an EditText and a button.
     Capture the text the user enters and take them to the recipients activity to choose recipients. Then adapt
     the code to send a the text as a message instead of the current path for photos or videos.*/
 
-public class MessageActivity extends ActionBarActivity {
+public class MessageActivity extends Activity {
 
     protected Button mSendButton;
+    protected Button mCancelButton;
     protected EditText mMessageText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class MessageActivity extends ActionBarActivity {
         setContentView(R.layout.activity_message);
 
         mSendButton = (Button) findViewById(R.id.sendTextButton);
+        mCancelButton = (Button) findViewById(R.id.cancelMessageButton);
         mMessageText = (EditText) findViewById(R.id.messageEditText);
 
         mSendButton.setOnClickListener(new View.OnClickListener() {
@@ -36,32 +38,20 @@ public class MessageActivity extends ActionBarActivity {
                 // Pasamos el mensaje en el intent
                 recipientsIntent.putExtra(ParseConstants.KEY_FILE_TYPE,ParseConstants.TYPE_TEXT);
                 recipientsIntent.putExtra(ParseConstants.TYPE_TEXT, texto);
-                startActivityForResult(recipientsIntent,MainActivity.SEND_TEXT);
+                recipientsIntent.putExtra(ParseConstants.KEY_SENDER_ID, ParseUser.getCurrentUser().getObjectId());
+                startActivityForResult(recipientsIntent, MainActivity.SEND_TEXT);
+
                 finish();
 
             }
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_message, menu);
-        return true;
-    }
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+            }
+        });
     }
 }

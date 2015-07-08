@@ -1,16 +1,15 @@
 package com.avalladares.ribbit.ui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.avalladares.ribbit.R;
-import com.avalladares.ribbit.adapters.UsersAdapter;
 import com.avalladares.ribbit.utilities.MD5Util;
 import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.FindCallback;
@@ -25,7 +24,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class ProfileActivity extends ActionBarActivity {
+public class ProfileActivity extends Activity {
 
     @Bind(R.id.firstNameField) TextView mFirstNameField;
     @Bind(R.id.lastNameField) TextView mLastNameField;
@@ -35,6 +34,7 @@ public class ProfileActivity extends ActionBarActivity {
     @Bind(R.id.userHeadLabel) TextView mUserHeadLabel;
     @Bind(R.id.imageView) ImageView mAvatar;
     @Bind(R.id.profileProgressBar) ProgressBar mProgressBar;
+    @Bind(R.id.cancelButton) Button mCancelButton;
 
     protected ParseUser mUserFound = new ParseUser();
 
@@ -82,7 +82,7 @@ public class ProfileActivity extends ActionBarActivity {
                         // y d404 para que nos de un error 404 si no tiene imagen asociada
                         String gravatarHash = MD5Util.md5Hex(email);
                         String gratavarURL = "http://www.gravatar.com/avatar/" + gravatarHash + "?s=204"
-                                + "&d404";
+                                + "&d=404";
 
                         Picasso.with(getApplicationContext())
                                 .load(gratavarURL)
@@ -92,7 +92,7 @@ public class ProfileActivity extends ActionBarActivity {
 
                     }
 
-                }   else {
+                } else {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
                     builder.setMessage(e.getMessage());
@@ -106,9 +106,17 @@ public class ProfileActivity extends ActionBarActivity {
 
         });
 
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
 
+            }
+        });
 
 
 
     }
+
+
 }

@@ -67,7 +67,7 @@ public class InboxFragment extends ListFragment {
         mProgressBar = (ProgressBar) getActivity().findViewById(R.id.progressBarInbox);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseConstants.CLASS_MESSAGES);
-        query.whereEqualTo(ParseConstants.KEY_RECIPIENT_IDS, ParseUser.getCurrentUser().getObjectId());
+        query.whereEqualTo(ParseConstants.KEY_RECIPIENT_IDS, ParseUser.getCurrentUser().getObjectId().toString());
         query.addDescendingOrder(ParseConstants.KEY_CREATED_AT);
 
 
@@ -145,7 +145,7 @@ public class InboxFragment extends ListFragment {
                 // View the text message
                 Intent intent = new Intent(getActivity(), ViewTextActivity.class);
                 intent.putExtra(ParseConstants.TYPE_TEXT,textMessage);
-                intent.putExtra(ParseConstants.KEY_SENDER_NAME,message.getString(ParseConstants.KEY_SENDER_NAME));
+                intent.putExtra(ParseConstants.KEY_SENDER_ID,message.get(ParseConstants.KEY_SENDER_ID).toString());
                 startActivity(intent);
             }
         }

@@ -26,7 +26,9 @@
         <EditText
             android:id="@+id/usernameField"
             android:hint="@string/username_hint"
-            style="@style/AuthEditText">
+            style="@style/AuthEditText"
+            android:maxLines="1"
+            android:maxLength="50">
             <requestFocus />
         </EditText>
 
@@ -35,7 +37,9 @@
             android:id="@+id/passwordField"
             android:hint="@string/password"
             style="@style/AuthEditText"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:maxLength="10"
+            android:maxLines="1"/>
     </LinearLayout>
 
 

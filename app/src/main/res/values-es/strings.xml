@@ -17,7 +17,7 @@
     <string name="login_error_title">Vaya!</string>
     <string name="menu_logout_label">Cerrar sesion</string>
     <string name="title_error_message">Lo sentimos!</string>
-    <string name="recover_password_button">RECUPERAR CONTRASEÑA</string>
+    <string name="recover_password_button">RECUPERAR</string>
     <string name="check_mail_recover_password">Comprueba tu correo!</string>
     <string name="title_activity_edit_friends">Editar amigos</string>
     <string name="title_activity_forgot_password">Recuperar contraseña</string>
@@ -35,7 +35,7 @@
     <string name="video_length_warning">Debes seleccionar un video con tamaño menor de 10 Mb</string>
     <string name="error_selecting_file">Hubo un problema con el archivo seleccionado</string>
     <string name="file_size_alert">El video seleccionado es demasiado largo!</string>
-    <string name="Send">Send</string>
+    <string name="Send">Enviar</string>
     <string name="error_creating_message">Hubo un error con el archivo seleccionado. \n Por favor selecciona otro.</string>
     <string name="message_sent">Mensaje enviado!</string>
     <string name="error_sending_message">Hubo un error al enviar el mensaje. \n Prueba de nuevo.</string>
@@ -55,4 +55,11 @@
     <string name="cancel_button_label">CANCELAR</string>
     <string name="buttonDivider_label">Button divider</string>
     <string name="error_mail">Debes introducir un email valido</string>
+    <string name="parse_notification_message">Tienes un nuevo mensaje de</string>
+    <string name="first_name_profile">First Name</string>
+    <string name="last_name_profile">Apellido</string>
+    <string name="username_profile">Nombre de usuario</string>
+    <string name="email_profile">eMail</string>
+    <string name="hometown_profile">Ciudad</string>
+    <string name="destroy_message">DESTRUIR</string>
 </resources>

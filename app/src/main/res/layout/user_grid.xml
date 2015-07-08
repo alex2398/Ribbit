@@ -22,7 +22,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:numColumns="auto_fit"
-        android:columnWidth="60dp"
+        android:columnWidth="80dp"
         android:stretchMode="columnWidth"
         android:horizontalSpacing="@dimen/users_grid_spacing"
         android:verticalSpacing="@dimen/users_grid_spacing"

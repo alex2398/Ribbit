@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.avalladares.ribbit.R;
+import com.avalladares.ribbit.RibbitApplication;
 import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -78,10 +79,14 @@ public class SignUpActivity extends Activity {
                     mProgressBar.setVisibility(View.INVISIBLE);
                     if (e == null) {
                         // Success!!
+                        RibbitApplication.updateParseInstallation(
+                                ParseUser.getCurrentUser());
                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+
+
                     } else {
                         // Sign up didn't succeed. Look at the ParseException
                         // to figure out what went wrong

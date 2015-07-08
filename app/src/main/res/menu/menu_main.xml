@@ -19,6 +19,6 @@
       <item android:id="@+id/action_text_message"
             android:title="@string/menu_message_label"
             android:orderInCategory="100"
-            android:icon="@drawable/ic_message_purple_24dp"
+            android:icon="@drawable/ic_ic_chat_bubble_outline_white_48dp"
             app:showAsAction="always"/>
 </menu>

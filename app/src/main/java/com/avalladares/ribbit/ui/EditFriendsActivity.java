@@ -1,19 +1,13 @@
 package com.avalladares.ribbit.ui;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.avalladares.ribbit.R;
@@ -61,6 +55,9 @@ public class EditFriendsActivity extends ActionBarActivity {
         mFriendsRelation= mCurrentUser.getRelation(ParseConstants.KEY_FRIENDS_RELATION);
 
 
+
+
+
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.orderByAscending(ParseConstants.KEY_USERNAME);
         query.setLimit(1000);
@@ -84,7 +81,6 @@ public class EditFriendsActivity extends ActionBarActivity {
                         i++;
                     }
 
-
                     // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
                     if (mGridView.getAdapter() == null) {
                         UsersAdapter adapter = new UsersAdapter(EditFriendsActivity.this, mUsers);
@@ -93,7 +89,7 @@ public class EditFriendsActivity extends ActionBarActivity {
                         // Refill it!
                         ((UsersAdapter)mGridView.getAdapter()).refill(mUsers);
                     }
-
+                    addFriendCheckmarks();
 
                 } else {
 
@@ -172,17 +168,8 @@ public class EditFriendsActivity extends ActionBarActivity {
                     }
                 } else {
                     Log.e(TAG, e.getMessage());
-                    AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
-                    builder.setMessage(e.getMessage());
-                    builder.setTitle(getString(R.string.title_error_message));
-                    builder.setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-
                 }
             }
         });
-
-
     }
 }

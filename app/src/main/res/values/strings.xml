@@ -24,7 +24,7 @@
     <string name="hello_world" translatable="false">Hello world!</string>
     <string name="title_activity_forgot_password">Forgot Password</string>
     <string name="title_error_message">We\'re sorry!</string>
-    <string name="recover_password_button">RECOVER PASSWORD</string>
+    <string name="recover_password_button">RECOVER </string>
     <string name="check_mail_recover_password">Check your mail inbox</string>
     <string name="first_name_hint">First Name</string>
     <string name="hometown_hint">Home Town</string>
@@ -63,5 +63,13 @@
     <string name="cancel_button_label">CANCEL</string>
     <string name="buttonDivider_label">Button divider</string>
     <string name="error_mail">Must enter a valid email</string>
+    <string name="parse_notification_message">You have a new message from</string>
+    <string name="first_name_profile">First Name</string>
+    <string name="last_name_profile">Last Name</string>
+    <string name="username_profile">User Name</string>
+    <string name="email_profile">eMail</string>
+    <string name="hometown_profile">Home Town</string>
+    <string name="singup">Sign Up</string>
+    <string name="destroy_message">DESTROY</string>
 
 </resources>

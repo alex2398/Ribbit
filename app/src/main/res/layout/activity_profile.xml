@@ -2,6 +2,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                style="@style/AuthBackground"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
@@ -17,117 +18,118 @@
         android:scaleType="fitXY"
         />
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="USER"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="24sp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/userHeadLabel"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/imageView"/>
 
-    <TextView
-        android:layout_width="100dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="First Name"
-        android:id="@+id/firstNameLabel"
+        android:layout_marginTop="0dp"
         android:layout_below="@+id/userHeadLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"/>
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Last Name"
-        android:id="@+id/lastNameLabel"
-        android:layout_below="@+id/firstNameLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"/>
+        android:id="@+id/LinearContainerProfile">
+    <LinearLayout
+        style="@style/AuthFieldContainer"
+        android:padding="5dp"
+        android:layout_margin="1dp"
+        android:layout_weight="2"
+        android:id="@+id/labelsLayout">
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="User Name"
-        android:id="@+id/userNameLabel"
-        android:layout_below="@+id/lastNameLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"/>
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="eMail"
-        android:id="@+id/emailLabel"
-        android:layout_below="@+id/userNameLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"/>
 
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Home Town"
-        android:id="@+id/hometownLabel"
-        android:layout_below="@+id/emailLabel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/firstNameField"
-        android:layout_alignTop="@+id/firstNameLabel"
-        android:layout_toRightOf="@+id/lastNameLabel"
-        android:layout_toEndOf="@+id/lastNameLabel"/>
+        <TextView
+            android:text="@string/first_name_profile"
+            android:id="@+id/firstNameLabel"
+            style="@style/profile_label"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/lastNameField"
-        android:layout_alignTop="@+id/lastNameLabel"
-        android:layout_toRightOf="@+id/lastNameLabel"
-        android:layout_toEndOf="@+id/lastNameLabel"/>
+        <TextView
+            android:text="@string/last_name_profile"
+            android:id="@+id/lastNameLabel"
+            style="@style/profile_label"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/userField"
-        android:layout_alignTop="@+id/userNameLabel"
-        android:layout_toRightOf="@+id/userNameLabel"
-        android:layout_toEndOf="@+id/userNameLabel"/>
+        <TextView
+            android:text="@string/username_profile"
+            android:id="@+id/userNameLabel"
+            style="@style/profile_label"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/emailField"
-        android:layout_alignTop="@+id/emailLabel"
-        android:layout_toRightOf="@+id/emailLabel"
-        android:layout_toEndOf="@+id/emailLabel"/>
+        <TextView
+            android:text="@string/email_profile"
+            android:id="@+id/emailLabel"
+            style="@style/profile_label"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/homeTownField"
-        android:layout_alignTop="@+id/hometownLabel"
-        android:layout_toRightOf="@+id/hometownLabel"
-        android:layout_toEndOf="@+id/hometownLabel"/>
+        <TextView
+            android:text="@string/hometown_profile"
+            android:id="@+id/hometownLabel"
+            style="@style/profile_label"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/AuthFieldContainer"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:layout_margin="1dp"
+        android:id="@+id/dataLayout"
+        android:divider="@android:drawable/divider_horizontal_textfield">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/firstNameField"
+            android:text="TEST"
+            style="@style/profile_label"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lastNameField"
+            android:text="TEST"
+            style="@style/profile_label"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userField"
+            android:text="TEST"
+            style="@style/profile_label"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailField"
+            android:text="TEST"
+            style="@style/profile_label"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TEST"
+            android:id="@+id/homeTownField"
+            style="@style/profile_label"
+            />
+    </LinearLayout>
+    </LinearLayout>
+    <Button
+        android:layout_width="150dp"
+        android:text="VOLVER"
+        android:id="@+id/cancelButton"
+        style="@style/AuthButton"
+        android:layout_below="@+id/LinearContainerProfile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
 
     <ProgressBar
         android:layout_width="wrap_content"

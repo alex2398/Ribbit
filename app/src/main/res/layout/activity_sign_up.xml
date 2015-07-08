@@ -25,7 +25,9 @@
         <EditText
             android:id="@+id/usernameField"
             android:hint="@string/username_hint"
-            style="@style/AuthEditText">
+            style="@style/AuthEditText"
+            android:maxLines="1"
+            android:maxLength="20">
             <requestFocus/>
         </EditText>
 
@@ -33,29 +35,38 @@
             android:id="@+id/passwordField"
             android:hint="@string/password"
             style="@style/AuthEditText"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            android:maxLength="10"
+            android:maxLines="1"/>
 
         <EditText
 
             android:id="@+id/emailField"
             android:hint="@string/email_hint"
             style="@style/AuthEditText"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:maxLines="1"/>
 
         <EditText
             android:id="@+id/nameField"
             android:hint="@string/first_name_hint"
-            style="@style/AuthEditText"/>
+            style="@style/AuthEditText"
+            android:maxLines="1"
+            android:maxLength="50"/>
 
         <EditText
             android:id="@+id/lastNameField"
             style="@style/AuthEditText"
-            android:hint="@string/last_name_hint"/>
+            android:hint="@string/last_name_hint"
+            android:maxLength="50"
+            android:maxLines="1"/>
 
         <EditText
             android:id="@+id/homeTownField"
             android:hint="@string/hometown_hint"
-            style="@style/AuthEditText"/>
+            style="@style/AuthEditText"
+            android:maxLength="50"
+            android:maxLines="1"/>
 
 
     </LinearLayout>

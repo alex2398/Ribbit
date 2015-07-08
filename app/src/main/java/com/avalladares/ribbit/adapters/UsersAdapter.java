@@ -1,7 +1,6 @@
 package com.avalladares.ribbit.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import com.avalladares.ribbit.utilities.MD5Util;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -84,7 +82,7 @@ public class UsersAdapter extends ArrayAdapter<ParseUser>{
             // y d404 para que nos de un error 404 si no tiene imagen asociada
             String gravatarHash = MD5Util.md5Hex(email);
             String gratavarURL = "http://www.gravatar.com/avatar/" + gravatarHash + "?s=204"
-                    + "&d404";
+                    + "&d=404";
 
             Picasso.with(mContext)
                     .load(gratavarURL)

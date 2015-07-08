@@ -1,21 +1,15 @@
 package com.avalladares.ribbit.ui;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.media.Image;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -32,6 +26,7 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
@@ -54,6 +49,7 @@ public class RecipientsActivity extends ActionBarActivity {
     protected Uri mMediaUri;
     protected String mFileType;
     protected String mTextMessage;
+    protected String mSenderMail;
     protected GridView mGridView;
 
 
@@ -77,6 +73,7 @@ public class RecipientsActivity extends ActionBarActivity {
         mFileType = getIntent().getExtras().getString(ParseConstants.KEY_FILE_TYPE);
         if (mFileType.equals(ParseConstants.TYPE_TEXT)) {
             mTextMessage = getIntent().getExtras().getString(ParseConstants.TYPE_TEXT);
+            mSenderMail = getIntent().getExtras().getString(ParseConstants.KEY_SENDER_MAIL);
         }
 
         mGridView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -125,12 +122,7 @@ public class RecipientsActivity extends ActionBarActivity {
 
                 } else {
                     Log.e(TAG, e.getMessage());
-                    AlertDialog.Builder builder = new AlertDialog.Builder(RecipientsActivity.this);
-                    builder.setMessage(e.getMessage());
-                    builder.setTitle(getString(R.string.title_error_message));
-                    builder.setPositiveButton(android.R.string.ok, null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+
 
                 }
             }
@@ -199,6 +191,7 @@ public class RecipientsActivity extends ActionBarActivity {
 
         if (mFileType.equals(ParseConstants.TYPE_TEXT)) {
             message.put(ParseConstants.KEY_TEXT, mTextMessage);
+
             return message;
         } else {
 
@@ -265,7 +258,7 @@ public class RecipientsActivity extends ActionBarActivity {
                 mMenuItem.setVisible(false);
             }
 
-            ImageView checkImageView = (ImageView)findViewById(R.id.checkImageView);
+            ImageView checkImageView = (ImageView)view.findViewById(R.id.checkImageView);
 
             if (mGridView.isItemChecked(position)) {
                 // add the recipient
@@ -281,8 +274,15 @@ public class RecipientsActivity extends ActionBarActivity {
     };
 
     protected void sendPushNotifications() {
+
         ParseQuery<ParseInstallation> query = ParseInstallation.getQuery();
         query.whereContainedIn(ParseConstants.KEY_USER_ID,getRecipientsIds());
+
+
+        ParsePush push = new ParsePush();
+        push.setQuery(query);
+        push.setMessage(getString(R.string.parse_notification_message) + " " + ParseUser.getCurrentUser().getUsername().toString() + "!");
+        push.sendInBackground();
 
     }
 }

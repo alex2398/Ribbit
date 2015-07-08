@@ -6,7 +6,7 @@
     <color name="light_purple_button">#e1d2f3</color>
     <color name="pressed_purple_button">#ba9dda</color>
     <color name="focused_purple_button">#d6c3ed</color>
-    <color name="text_color">#250024</color>
+    <color name="text_color">#61408c</color>
     <color name="ligh_purple_background">#e9e4ed</color>
     <color name="swipeRefresh1">#482c6f</color>
     <color name="swipeRefresh2">#ad78d9</color>
