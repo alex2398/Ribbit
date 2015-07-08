@@ -53,9 +53,9 @@
     <string name="title_activity_message">Send Message</string>
     <string name="title_activity_view_image" translatable="false">Ribbit</string>
     <string name="send_date">Send </string>
-    <string name="new_text_message_title">Nuevo mensaje</string>
+    <string name="new_text_message_title">New message</string>
     <string name="title_activity_view_text">Text message</string>
-    <string name="message_from">Mensaje de </string>
+    <string name="message_from">Message from</string>
     <string name="password">Password</string>
     <string name="contentDescriptionBackground">Ribbit Frog Background Image</string>
     <string name="forget_password">Forgot your password?</string>

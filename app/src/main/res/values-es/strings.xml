@@ -4,7 +4,7 @@
     <string name="password">Contraseña</string>
     <string name="login_button">ENTRAR</string>
     <string name="singup">Registrarse</string>
-    <string name="email_hint">email@example.com</string>
+    <string name="email_hint">email@ejemplo.com</string>
     <string name="action_settings">Configuracion</string>
     <string name="signUp_error_message">Verifica que has introducido un usuario, contraseña y direccion de email!</string>
     <string name="signUp_error_title">Vaya!</string>
@@ -56,11 +56,11 @@
     <string name="buttonDivider_label">Button divider</string>
     <string name="error_mail">Debes introducir un email valido</string>
     <string name="parse_notification_message">Tienes un nuevo mensaje de</string>
-    <string name="first_name_profile">First Name</string>
     <string name="last_name_profile">Apellido</string>
-    <string name="username_profile">Nombre de usuario</string>
+    <string name="username_profile">Usuario</string>
     <string name="email_profile">eMail</string>
     <string name="hometown_profile">Ciudad</string>
     <string name="destroy_message">DESTRUIR</string>
     <string name="profile_back">VOLVER</string>
+    <string name="first_name_profile">Nombre</string>
 </resources>
