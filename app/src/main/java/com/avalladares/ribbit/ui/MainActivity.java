@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
                     Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
                     // Obtenemos el identificador del archivo con el metodo getOutputMediaFileuri (creado mas abajo)
-                    mMediaUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                    mMediaUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO);
                     if (mMediaUri == null) {
                         //Display an error
                         Toast.makeText(MainActivity.this,getString(R.string.error_external_storage),Toast.LENGTH_SHORT).show();
@@ -222,6 +222,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             if (! mediaStorageDir.exists()){
                 if (! mediaStorageDir.mkdirs()){
                     Log.d(TAG,getString(R.string.fail_create_directory));
+                    Toast.makeText(this,"ERROR!!",Toast.LENGTH_LONG).show();
                     return null;
                 }
             }

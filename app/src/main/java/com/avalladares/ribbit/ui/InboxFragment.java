@@ -67,7 +67,7 @@ public class InboxFragment extends ListFragment {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                //retrieveMessages();
+                retrieveMessages();
             }
         }, 1 * 60 * 1000); // 1 minutos
 
