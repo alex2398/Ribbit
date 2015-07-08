@@ -26,6 +26,8 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by avalladares on 01/07/2015.
@@ -61,10 +63,17 @@ public class InboxFragment extends ListFragment {
 
         retrieveMessages();
 
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                //retrieveMessages();
+            }
+        }, 1 * 60 * 1000); // 1 minutos
+
     }
 
     private void retrieveMessages() {
-        mProgressBar = (ProgressBar) getActivity().findViewById(R.id.progressBarInbox);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery(ParseConstants.CLASS_MESSAGES);
         query.whereEqualTo(ParseConstants.KEY_RECIPIENT_IDS, ParseUser.getCurrentUser().getObjectId().toString());
@@ -74,11 +83,11 @@ public class InboxFragment extends ListFragment {
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> messages, ParseException e) {
+                if (isAdded()) {
 
-
-                if (mSwipeRefreshLayout.isRefreshing()) {
-                    mSwipeRefreshLayout.setRefreshing(false);
-                } else {
+                    if (mSwipeRefreshLayout.isRefreshing()) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
                     if (e == null) {
                         // Success
                         // Encontramos mensajes para el usuario
@@ -109,6 +118,7 @@ public class InboxFragment extends ListFragment {
                 }
             }
         });
+
     }
 
     @Override

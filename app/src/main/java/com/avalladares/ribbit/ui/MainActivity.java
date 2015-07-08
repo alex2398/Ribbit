@@ -257,9 +257,13 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     }
 
     // Metodo para comprobar si la memoria externa esta montada (accesible)
-    private boolean isExternalStorageAvailable() {
-        String state = Environment.MEDIA_MOUNTED;
-        return state.equalsIgnoreCase(Environment.MEDIA_MOUNTED);
+    public static boolean isExternalStorageAvailable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

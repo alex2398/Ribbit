@@ -91,28 +91,26 @@ public class FriendsFragment extends android.support.v4.app.Fragment {
 
                     if (mSwipeRefreshLayout.isRefreshing()) {
                         mSwipeRefreshLayout.setRefreshing(false);
-                    } else {
-                        if (e == null) {
-                            mFriends = friends;
+                    }
+                    if (e == null) {
+                        mFriends = friends;
 
-                            // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
-                            if (mGridView.getAdapter() == null) {
-                                UsersAdapter adapter = new UsersAdapter(getActivity(), mFriends);
-                                mGridView.setAdapter(adapter);
-                            } else {
-                                // Refill it!
-                                ((UsersAdapter) mGridView.getAdapter()).refill(mFriends);
-                            }
-
-
+                        // Pasamos con un adaptador el array de nombres a la ListView del Layout con un contenedor simple_list_item_checked
+                        if (mGridView.getAdapter() == null) {
+                            UsersAdapter adapter = new UsersAdapter(getActivity(), mFriends);
+                            mGridView.setAdapter(adapter);
                         } else {
-                            Log.e(TAG, e.getMessage());
-
-
+                            // Refill it!
+                            ((UsersAdapter) mGridView.getAdapter()).refill(mFriends);
                         }
+
+
+                    } else {
+                        Log.e(TAG, e.getMessage());
+
+
                     }
                 }
-
             }
         });
     }

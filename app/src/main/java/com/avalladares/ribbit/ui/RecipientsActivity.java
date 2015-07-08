@@ -232,10 +232,11 @@ public class RecipientsActivity extends ActionBarActivity {
     }
 
     protected void send(ParseObject message) {
-
+        mProgressBar.setVisibility(View.VISIBLE);
         message.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
+                mProgressBar.setVisibility(View.VISIBLE);
                 if (e==null) {
                     Toast.makeText(RecipientsActivity.this, getString(R.string.message_sent),Toast.LENGTH_LONG).show();
                     sendPushNotifications();
