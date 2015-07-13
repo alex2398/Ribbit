@@ -1,4 +1,4 @@
-package com.avalladares.ribbit.ui;
+package com.avalladares.ribbit.ui.activities;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.avalladares.ribbit.R;
-import com.avalladares.ribbit.RibbitApplication;
 import com.avalladares.ribbit.adapters.UsersAdapter;
 import com.avalladares.ribbit.utilities.ParseConstants;
 import com.daimajia.androidanimations.library.Techniques;

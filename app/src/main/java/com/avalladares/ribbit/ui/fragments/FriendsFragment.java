@@ -1,4 +1,4 @@
-package com.avalladares.ribbit.ui;
+package com.avalladares.ribbit.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.avalladares.ribbit.R;
 import com.avalladares.ribbit.adapters.UsersAdapter;
+import com.avalladares.ribbit.ui.activities.EditFriendsActivity;
+import com.avalladares.ribbit.ui.activities.ProfileActivity;
 import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;

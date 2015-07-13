@@ -1,4 +1,4 @@
-package com.avalladares.ribbit.ui;
+package com.avalladares.ribbit.ui.activities;
 
 import android.app.AlertDialog;
 import android.net.Uri;
@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avalladares.ribbit.R;
-import com.avalladares.ribbit.RibbitApplication;
 import com.avalladares.ribbit.adapters.UsersAdapter;
 import com.avalladares.ribbit.utilities.FileHelper;
 import com.avalladares.ribbit.utilities.ParseConstants;

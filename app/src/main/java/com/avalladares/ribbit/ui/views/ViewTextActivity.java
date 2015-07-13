@@ -1,4 +1,4 @@
-package com.avalladares.ribbit.ui;
+package com.avalladares.ribbit.ui.views;
 
 import android.app.Activity;
 import android.os.Bundle;

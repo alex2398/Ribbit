@@ -7,8 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.avalladares.ribbit.R;
-import com.avalladares.ribbit.ui.FriendsFragment;
-import com.avalladares.ribbit.ui.InboxFragment;
+import com.avalladares.ribbit.ui.fragments.FriendsFragment;
+import com.avalladares.ribbit.ui.fragments.InboxFragment;
 
 import java.util.Locale;
 

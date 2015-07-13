@@ -1,4 +1,4 @@
-package com.avalladares.ribbit.ui;
+package com.avalladares.ribbit.ui.fragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -16,6 +16,9 @@ import android.widget.ProgressBar;
 
 import com.avalladares.ribbit.R;
 import com.avalladares.ribbit.adapters.MessageAdapter;
+import com.avalladares.ribbit.ui.views.ViewImageActivity;
+import com.avalladares.ribbit.ui.views.ViewTextActivity;
+import com.avalladares.ribbit.ui.activities.MainActivity;
 import com.avalladares.ribbit.utilities.ParseConstants;
 import com.parse.FindCallback;
 import com.parse.ParseException;
